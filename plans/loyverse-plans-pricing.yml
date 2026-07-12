@@ -1,0 +1,159 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Loyverse
+providerId: loyverse
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Point of Sale
+- POS
+- Retail
+- Inventory
+- Loyalty
+- Plans
+description: >-
+  Loyverse's core products - Loyverse POS, the Back Office Dashboard, Kitchen
+  Display, and Customer Display - are free to use, and the Loyverse API is
+  available to all accounts at no additional charge. Revenue comes from optional
+  per-store add-ons that unlock advanced features: Employee Management, Advanced
+  Inventory, and Unlimited Sales History. Each add-on is billed per store, with a
+  14-day free trial, and is discounted when paid annually (roughly two months
+  free). The API surfaces data governed by these plans (for example the
+  Employees API and richer inventory/purchasing features), so what a merchant can
+  do via the API can depend on which add-ons are active for that store.
+notes: >-
+  The API itself has no separate fee. Prices below are per store in USD and were
+  captured from the public Loyverse pricing page; verify current figures during
+  reconciliation. Merchants with more than 3 stores are directed to contact
+  Loyverse for Advanced Inventory pricing.
+sources:
+- https://loyverse.com/
+- https://loyverse.com/pricing
+- https://developer.loyverse.com/docs/
+plans:
+- id: loyverse-free
+  name: Free POS
+  type: free
+  description: >-
+    Loyverse POS, Dashboard, Kitchen Display, and Customer Display, plus full
+    access to the Loyverse REST API. Includes sales, basic inventory, and a
+    built-in loyalty program at no cost.
+  entries:
+  - label: Core POS and API
+    name: core_pos_api
+    type: flat
+    metric: account
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '0'
+    userMultiplied: false
+  elements:
+  - name: Loyverse POS App
+  - name: Back Office Dashboard
+  - name: Kitchen Display
+  - name: Customer Display
+  - name: REST API Access
+  - name: Loyalty Program
+- id: loyverse-unlimited-sales-history
+  name: Unlimited Sales History (Add-on)
+  type: paid
+  description: >-
+    Removes the sales-history window in reporting, retaining full sales history.
+    Billed per store.
+  entries:
+  - label: Unlimited Sales History (Monthly)
+    name: sales_history_monthly
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '5'
+    userMultiplied: true
+  - label: Unlimited Sales History (Annual)
+    name: sales_history_annual
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: '50'
+    userMultiplied: true
+  elements:
+  - name: Full Sales History Retention
+- id: loyverse-employee-management
+  name: Employee Management (Add-on)
+  type: paid
+  description: >-
+    Adds staff management - individual POS logins/PINs, roles and access rights,
+    timeclock, and per-employee sales reporting. Surfaced through the Employees
+    API. Billed per store.
+  entries:
+  - label: Employee Management (Monthly)
+    name: employee_mgmt_monthly
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '25'
+    userMultiplied: true
+  - label: Employee Management (Annual)
+    name: employee_mgmt_annual
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: '250'
+    userMultiplied: true
+  elements:
+  - name: Employee Logins and PINs
+  - name: Roles and Access Rights
+  - name: Timeclock
+  - name: Per-Employee Reporting
+- id: loyverse-advanced-inventory
+  name: Advanced Inventory (Add-on)
+  type: paid
+  description: >-
+    Adds purchase orders, inventory counts, transfers, valuation and production
+    features on top of basic inventory tracking. Complements the Inventory and
+    Suppliers API surfaces. Billed per store; contact Loyverse for pricing above
+    3 stores.
+  entries:
+  - label: Advanced Inventory (Monthly)
+    name: advanced_inventory_monthly
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '25'
+    userMultiplied: true
+  - label: Advanced Inventory (Annual)
+    name: advanced_inventory_annual
+    type: flat
+    metric: store
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: '250'
+    userMultiplied: true
+  elements:
+  - name: Purchase Orders
+  - name: Inventory Counts
+  - name: Stock Transfers
+  - name: Inventory Valuation
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

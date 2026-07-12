@@ -1,0 +1,46 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/loyverse-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: >-
+    Personal access token. Generated in the Loyverse Back Office under Settings,
+    Access Tokens (up to 20 tokens per account, each with an optional expiration).
+    A personal token grants unlimited access to all resources of the account that
+    created it. Passed as `Authorization: Bearer YOUR_ACCESS_TOKEN`.
+  sources:
+  - https://help.loyverse.com/help/loyverse-api
+  - https://developer.loyverse.com/docs/
+- name: oauth2
+  type: oauth2
+  flow: authorizationCode
+  authorizationUrl: https://api.loyverse.com/oauth/authorize
+  tokenUrl: https://api.loyverse.com/oauth/token
+  description: >-
+    OAuth 2.0 authorization-code flow for third-party apps that act on behalf of
+    other Loyverse merchants. Register an app in the Loyverse developer dashboard
+    to obtain a client_id and client_secret, then request scoped permissions.
+    Access is granted per scope rather than the unlimited access of a personal
+    token.
+  scopes:
+    CUSTOMERS_READ: Read customers and loyalty data.
+    CUSTOMERS_WRITE: Create and update customers.
+    EMPLOYEES_READ: Read employees.
+    ITEMS_READ: Read items, categories, variants, modifiers, discounts, and taxes.
+    ITEMS_WRITE: Create and update items and related catalog objects.
+    INVENTORY_READ: Read inventory levels.
+    INVENTORY_WRITE: Update inventory levels.
+    MERCHANT_READ: Read merchant and store information.
+    PAYMENT_TYPES_READ: Read payment types.
+    RECEIPTS_READ: Read receipts (sales).
+    RECEIPTS_WRITE: Create receipts.
+    STORES_READ: Read stores.
+  sources:
+  - https://developer.loyverse.com/docs/
+  - https://support.loyverse.com/en/articles/8061203-faqs-about-loyverse-api

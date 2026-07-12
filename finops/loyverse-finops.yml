@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Loyverse
+providerId: loyverse
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Point of Sale
+- POS
+- Retail
+- Inventory
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Loyverse spend. Loyverse's core POS, Dashboard, Kitchen
+  Display, Customer Display, and the REST API are free, so for many integrations
+  there is no direct Loyverse invoice - the cost is the merchant's own
+  development and hosting of any integration. Where spend does occur it is
+  driven by optional per-store add-ons (Employee Management, Advanced Inventory,
+  and Unlimited Sales History), each billed monthly or annually per store. Cost
+  therefore scales with the number of stores and which add-ons each store
+  enables, not with API call volume.
+notes: >-
+  The API has no metered per-call fee; the dominant Loyverse-billed cost is the
+  count of stores times the enabled add-ons. Verify current per-store add-on
+  rates on the Loyverse pricing page during reconciliation.
+sources:
+- https://loyverse.com/
+- https://loyverse.com/pricing
+- https://developer.loyverse.com/docs/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Loyverse
+serviceCategory: Point of Sale and Commerce
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Loyverse POS
+  ServiceCategory: Point of Sale and Commerce
+  ProviderName: Loyverse
+  PublisherName: Loyverse
+  InvoiceIssuerName: Loyverse
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: employee_management_stores
+  description: Number of stores with the Employee Management add-on, billed per store.
+  unit: stores
+  aggregation: sum
+  dimensions:
+  - account
+  - store
+- name: advanced_inventory_stores
+  description: Number of stores with the Advanced Inventory add-on, billed per store.
+  unit: stores
+  aggregation: sum
+  dimensions:
+  - account
+  - store
+- name: unlimited_sales_history_stores
+  description: Number of stores with the Unlimited Sales History add-on, billed per store.
+  unit: stores
+  aggregation: sum
+  dimensions:
+  - account
+  - store
+- name: api_requests
+  description: Loyverse API request volume; not directly billed, but relevant to rate limits and integration cost.
+  unit: requests
+  aggregation: sum
+  dimensions:
+  - account
+  - token
+principles:
+- name: Visibility
+  description: Track which stores have which paid add-ons enabled; the free API itself carries no metered charge.
+- name: Allocation
+  description: Map add-on subscriptions to the stores/locations and teams that use them so cost lands on the right cost center.
+- name: Optimization
+  description: Enable add-ons only on the stores that need them, use the 14-day trial to validate value, and pay annually (about two months free) where a store's need is ongoing.
+- name: Accountability
+  description: Review the store-by-add-on subscription list monthly against actual usage and disable add-ons on stores that no longer need them.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

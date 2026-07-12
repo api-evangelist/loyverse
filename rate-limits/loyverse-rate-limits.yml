@@ -1,0 +1,60 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Loyverse
+providerId: loyverse
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Point of Sale
+- POS
+- Retail
+- Rate Limiting
+- Quotas
+description: >-
+  The Loyverse API enforces rate limiting to protect the platform, returning
+  HTTP 429 (Too Many Requests) when a client exceeds the allowed request rate.
+  Community and reference sources cite an approximate ceiling of around 60
+  requests per minute per token, though Loyverse does not prominently publish a
+  single fixed numeric figure and may adjust limits per endpoint. Clients should
+  read the response headers, back off on 429 responses, and use cursor-based
+  pagination rather than tight polling. Personal access tokens are also capped at
+  20 per account.
+notes: >-
+  The ~60 requests/minute figure is drawn from third-party/community
+  documentation and should be confirmed against the live Loyverse API reference
+  during reconciliation. Prefer webhooks over frequent polling for near-real-time
+  updates.
+sources:
+- https://developer.loyverse.com/docs/
+- https://help.loyverse.com/help/loyverse-api
+- https://support.loyverse.com/en/articles/8061203-faqs-about-loyverse-api
+responseCodes:
+  throttled: 429
+limits:
+- name: API Request Rate
+  scope: token
+  metric: requests
+  limit: ~60 per minute (community-reported; verify)
+  notes: Exceeding the rate returns HTTP 429. Loyverse does not prominently publish a single fixed number.
+- name: Personal Access Tokens
+  scope: account
+  metric: tokens
+  limit: 20
+  notes: Maximum of 20 personal access tokens per Loyverse account.
+- name: Page Size
+  scope: request
+  metric: records
+  limit: up to 250 per page
+  notes: List endpoints are cursor-paginated; use the returned cursor to page through results.
+policies:
+- name: Backoff Strategy
+  description: On HTTP 429, pause and retry with exponential backoff and jitter rather than retrying immediately.
+- name: Prefer Webhooks
+  description: Use webhooks for event-driven updates (for example receipts and inventory changes) instead of tight polling loops.
+- name: Cursor Pagination
+  description: Iterate large collections with the cursor returned by list endpoints to minimize request volume.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

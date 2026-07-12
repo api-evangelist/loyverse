@@ -1,0 +1,300 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{accessToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Items", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List items.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/items?limit=50",
+            "params": [
+              { "name": "limit", "value": "50", "type": "query", "description": "Max records per page (up to 250)." },
+              { "name": "cursor", "value": "", "type": "query", "description": "Cursor for the next page." },
+              { "name": "store_id", "value": "", "type": "query", "description": "Filter items available in a store." }
+            ]
+          },
+          "docs": "Returns a cursor-paginated list of catalog items and their variants."
+        },
+        {
+          "info": { "name": "Create or update an item.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/items",
+            "body": { "type": "json", "data": "{\n  \"item_name\": \"Espresso\",\n  \"track_stock\": true,\n  \"variants\": [{ \"sku\": \"ESP-01\", \"default_price\": 3.5 }]\n}" }
+          },
+          "docs": "Creates a new item or updates an existing one when an id is supplied."
+        },
+        {
+          "info": { "name": "Get an item.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/items/:item_id",
+            "params": [{ "name": "item_id", "value": "", "type": "path", "description": "The item id." }]
+          },
+          "docs": "Retrieves a single item by id."
+        },
+        {
+          "info": { "name": "Delete an item.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/items/:item_id",
+            "params": [{ "name": "item_id", "value": "", "type": "path", "description": "The item id." }]
+          },
+          "docs": "Deletes an item."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Categories", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List categories.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/categories?limit=50" },
+          "docs": "Returns a cursor-paginated list of merchandising categories."
+        },
+        {
+          "info": { "name": "Create or update a category.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/categories",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Drinks\"\n}" }
+          },
+          "docs": "Creates or updates a category."
+        },
+        {
+          "info": { "name": "Get a category.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/categories/:category_id",
+            "params": [{ "name": "category_id", "value": "", "type": "path", "description": "The category id." }]
+          },
+          "docs": "Retrieves a category by id."
+        },
+        {
+          "info": { "name": "Delete a category.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/categories/:category_id",
+            "params": [{ "name": "category_id", "value": "", "type": "path", "description": "The category id." }]
+          },
+          "docs": "Deletes a category."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Receipts", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List receipts.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/receipts?limit=50",
+            "params": [
+              { "name": "limit", "value": "50", "type": "query", "description": "Max records per page." },
+              { "name": "store_id", "value": "", "type": "query", "description": "Filter by store." },
+              { "name": "created_at_min", "value": "", "type": "query", "description": "Earliest created_at (ISO 8601)." },
+              { "name": "created_at_max", "value": "", "type": "query", "description": "Latest created_at (ISO 8601)." }
+            ]
+          },
+          "docs": "Returns a cursor-paginated list of sales receipts with line items and payments."
+        },
+        {
+          "info": { "name": "Create a receipt.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/receipts",
+            "body": { "type": "json", "data": "{\n  \"store_id\": \"\",\n  \"line_items\": [{ \"variant_id\": \"\", \"quantity\": 1, \"price\": 3.5 }],\n  \"payments\": [{ \"payment_type_id\": \"\", \"money_amount\": 3.5 }]\n}" }
+          },
+          "docs": "Creates a sales receipt, used to push external orders into Loyverse as sales."
+        },
+        {
+          "info": { "name": "Get a receipt.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/receipts/:receipt_number",
+            "params": [{ "name": "receipt_number", "value": "", "type": "path", "description": "The receipt number." }]
+          },
+          "docs": "Retrieves a single receipt by receipt number."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Customers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List customers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/customers?limit=50" },
+          "docs": "Returns a cursor-paginated list of customers and loyalty data."
+        },
+        {
+          "info": { "name": "Create or update a customer.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/customers",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\"\n}" }
+          },
+          "docs": "Creates or updates a customer."
+        },
+        {
+          "info": { "name": "Get a customer.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/customers/:customer_id",
+            "params": [{ "name": "customer_id", "value": "", "type": "path", "description": "The customer id." }]
+          },
+          "docs": "Retrieves a customer by id."
+        },
+        {
+          "info": { "name": "Delete a customer.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/customers/:customer_id",
+            "params": [{ "name": "customer_id", "value": "", "type": "path", "description": "The customer id." }]
+          },
+          "docs": "Deletes a customer."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Inventory", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get inventory levels.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/inventory?limit=50",
+            "params": [
+              { "name": "limit", "value": "50", "type": "query", "description": "Max records per page." },
+              { "name": "store_id", "value": "", "type": "query", "description": "Filter by store." },
+              { "name": "variant_ids", "value": "", "type": "query", "description": "Comma-separated variant ids." }
+            ]
+          },
+          "docs": "Returns stock on hand per variant and store."
+        },
+        {
+          "info": { "name": "Update inventory levels.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/inventory",
+            "body": { "type": "json", "data": "{\n  \"inventory_levels\": [{ \"variant_id\": \"\", \"store_id\": \"\", \"in_stock\": 10 }]\n}" }
+          },
+          "docs": "Sets stock counts for one or more variant/store pairs."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Stores", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List stores.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/stores" },
+          "docs": "Lists the merchant's stores (locations)."
+        },
+        {
+          "info": { "name": "Get a store.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/stores/:store_id",
+            "params": [{ "name": "store_id", "value": "", "type": "path", "description": "The store id." }]
+          },
+          "docs": "Retrieves a store by id."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Employees", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List employees.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/employees?limit=50" },
+          "docs": "Returns a cursor-paginated list of employees."
+        },
+        {
+          "info": { "name": "Create or update an employee.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/employees",
+            "body": { "type": "json", "data": "{\n  \"name\": \"Sam Barista\",\n  \"stores\": []\n}" }
+          },
+          "docs": "Creates or updates an employee."
+        },
+        {
+          "info": { "name": "Get an employee.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/employees/:employee_id",
+            "params": [{ "name": "employee_id", "value": "", "type": "path", "description": "The employee id." }]
+          },
+          "docs": "Retrieves an employee by id."
+        },
+        {
+          "info": { "name": "Delete an employee.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/employees/:employee_id",
+            "params": [{ "name": "employee_id", "value": "", "type": "path", "description": "The employee id." }]
+          },
+          "docs": "Deletes an employee."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Reference Data", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List payment types.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/payment_types" },
+          "docs": "Lists configured payment types."
+        },
+        {
+          "info": { "name": "Get merchant information.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/merchants" },
+          "docs": "Returns merchant account information."
+        },
+        {
+          "info": { "name": "List taxes.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/taxes" },
+          "docs": "Lists tax definitions."
+        },
+        {
+          "info": { "name": "List discounts.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/discounts" },
+          "docs": "Lists discount definitions."
+        },
+        {
+          "info": { "name": "List modifiers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/modifiers" },
+          "docs": "Lists item modifiers."
+        },
+        {
+          "info": { "name": "List suppliers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/suppliers" },
+          "docs": "Lists suppliers."
+        },
+        {
+          "info": { "name": "List POS devices.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/pos_devices" },
+          "docs": "Lists registered POS devices."
+        },
+        {
+          "info": { "name": "List shifts.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.loyverse.com/v1.0/shifts" },
+          "docs": "Lists cash register shifts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

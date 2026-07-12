@@ -1,0 +1,344 @@
+{
+  "info": {
+    "name": "Loyverse API",
+    "description": "REST API for the Loyverse point of sale (POS) platform. Base URL: https://api.loyverse.com/v1.0. Authenticate with a personal access token (Bearer) generated in the Loyverse Back Office, or via OAuth 2.0 for third-party apps. Covers items, categories, receipts, customers, inventory, stores, employees, payment types, merchants, taxes, discounts, modifiers, suppliers, POS devices, and shifts.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.loyverse.com/v1.0", "type": "string" },
+    { "key": "accessToken", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "List items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/items?limit=50", "host": ["{{baseUrl}}"], "path": ["items"], "query": [{ "key": "limit", "value": "50" }, { "key": "cursor", "value": "", "disabled": true }, { "key": "store_id", "value": "", "disabled": true }] },
+            "description": "Returns a cursor-paginated list of catalog items and their variants."
+          }
+        },
+        {
+          "name": "Create or update an item",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"item_name\": \"Espresso\",\n  \"category_id\": null,\n  \"track_stock\": true,\n  \"variants\": [\n    { \"sku\": \"ESP-01\", \"default_price\": 3.5 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/items", "host": ["{{baseUrl}}"], "path": ["items"] },
+            "description": "Creates a new item or updates an existing one when an id is supplied."
+          }
+        },
+        {
+          "name": "Get an item",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/items/:item_id", "host": ["{{baseUrl}}"], "path": ["items", ":item_id"], "variable": [{ "key": "item_id", "value": "" }] },
+            "description": "Retrieves a single item by id."
+          }
+        },
+        {
+          "name": "Delete an item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/items/:item_id", "host": ["{{baseUrl}}"], "path": ["items", ":item_id"], "variable": [{ "key": "item_id", "value": "" }] },
+            "description": "Deletes an item."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "List categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categories?limit=50", "host": ["{{baseUrl}}"], "path": ["categories"], "query": [{ "key": "limit", "value": "50" }] },
+            "description": "Returns a cursor-paginated list of merchandising categories."
+          }
+        },
+        {
+          "name": "Create or update a category",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Drinks\"\n}" },
+            "url": { "raw": "{{baseUrl}}/categories", "host": ["{{baseUrl}}"], "path": ["categories"] },
+            "description": "Creates or updates a category."
+          }
+        },
+        {
+          "name": "Get a category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categories/:category_id", "host": ["{{baseUrl}}"], "path": ["categories", ":category_id"], "variable": [{ "key": "category_id", "value": "" }] },
+            "description": "Retrieves a category by id."
+          }
+        },
+        {
+          "name": "Delete a category",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/categories/:category_id", "host": ["{{baseUrl}}"], "path": ["categories", ":category_id"], "variable": [{ "key": "category_id", "value": "" }] },
+            "description": "Deletes a category."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Receipts",
+      "item": [
+        {
+          "name": "List receipts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/receipts?limit=50", "host": ["{{baseUrl}}"], "path": ["receipts"], "query": [{ "key": "limit", "value": "50" }, { "key": "store_id", "value": "", "disabled": true }, { "key": "created_at_min", "value": "", "disabled": true }, { "key": "created_at_max", "value": "", "disabled": true }] },
+            "description": "Returns a cursor-paginated list of sales receipts."
+          }
+        },
+        {
+          "name": "Create a receipt",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"store_id\": \"\",\n  \"line_items\": [\n    { \"variant_id\": \"\", \"quantity\": 1, \"price\": 3.5 }\n  ],\n  \"payments\": [\n    { \"payment_type_id\": \"\", \"money_amount\": 3.5 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/receipts", "host": ["{{baseUrl}}"], "path": ["receipts"] },
+            "description": "Creates a sales receipt, used to push external orders into Loyverse as sales."
+          }
+        },
+        {
+          "name": "Get a receipt",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/receipts/:receipt_number", "host": ["{{baseUrl}}"], "path": ["receipts", ":receipt_number"], "variable": [{ "key": "receipt_number", "value": "" }] },
+            "description": "Retrieves a single receipt by receipt number."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "List customers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers?limit=50", "host": ["{{baseUrl}}"], "path": ["customers"], "query": [{ "key": "limit", "value": "50" }] },
+            "description": "Returns a cursor-paginated list of customers."
+          }
+        },
+        {
+          "name": "Create or update a customer",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\"\n}" },
+            "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] },
+            "description": "Creates or updates a customer."
+          }
+        },
+        {
+          "name": "Get a customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers/:customer_id", "host": ["{{baseUrl}}"], "path": ["customers", ":customer_id"], "variable": [{ "key": "customer_id", "value": "" }] },
+            "description": "Retrieves a customer by id."
+          }
+        },
+        {
+          "name": "Delete a customer",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/customers/:customer_id", "host": ["{{baseUrl}}"], "path": ["customers", ":customer_id"], "variable": [{ "key": "customer_id", "value": "" }] },
+            "description": "Deletes a customer."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Get inventory levels",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/inventory?limit=50", "host": ["{{baseUrl}}"], "path": ["inventory"], "query": [{ "key": "limit", "value": "50" }, { "key": "store_id", "value": "", "disabled": true }, { "key": "variant_ids", "value": "", "disabled": true }] },
+            "description": "Returns stock on hand per variant and store."
+          }
+        },
+        {
+          "name": "Update inventory levels",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"inventory_levels\": [\n    { \"variant_id\": \"\", \"store_id\": \"\", \"in_stock\": 10 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/inventory", "host": ["{{baseUrl}}"], "path": ["inventory"] },
+            "description": "Sets stock counts for one or more variant/store pairs."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stores",
+      "item": [
+        {
+          "name": "List stores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/stores", "host": ["{{baseUrl}}"], "path": ["stores"] },
+            "description": "Lists the merchant's stores (locations)."
+          }
+        },
+        {
+          "name": "Get a store",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/stores/:store_id", "host": ["{{baseUrl}}"], "path": ["stores", ":store_id"], "variable": [{ "key": "store_id", "value": "" }] },
+            "description": "Retrieves a store by id."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "List employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/employees?limit=50", "host": ["{{baseUrl}}"], "path": ["employees"], "query": [{ "key": "limit", "value": "50" }] },
+            "description": "Returns a cursor-paginated list of employees."
+          }
+        },
+        {
+          "name": "Create or update an employee",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Sam Barista\",\n  \"stores\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/employees", "host": ["{{baseUrl}}"], "path": ["employees"] },
+            "description": "Creates or updates an employee."
+          }
+        },
+        {
+          "name": "Get an employee",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/employees/:employee_id", "host": ["{{baseUrl}}"], "path": ["employees", ":employee_id"], "variable": [{ "key": "employee_id", "value": "" }] },
+            "description": "Retrieves an employee by id."
+          }
+        },
+        {
+          "name": "Delete an employee",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/employees/:employee_id", "host": ["{{baseUrl}}"], "path": ["employees", ":employee_id"], "variable": [{ "key": "employee_id", "value": "" }] },
+            "description": "Deletes an employee."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reference Data",
+      "item": [
+        {
+          "name": "List payment types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/payment_types", "host": ["{{baseUrl}}"], "path": ["payment_types"] },
+            "description": "Lists configured payment types."
+          }
+        },
+        {
+          "name": "Get merchant information",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/merchants", "host": ["{{baseUrl}}"], "path": ["merchants"] },
+            "description": "Returns merchant account information."
+          }
+        },
+        {
+          "name": "List taxes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/taxes", "host": ["{{baseUrl}}"], "path": ["taxes"] },
+            "description": "Lists tax definitions."
+          }
+        },
+        {
+          "name": "List discounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/discounts", "host": ["{{baseUrl}}"], "path": ["discounts"] },
+            "description": "Lists discount definitions."
+          }
+        },
+        {
+          "name": "List modifiers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/modifiers", "host": ["{{baseUrl}}"], "path": ["modifiers"] },
+            "description": "Lists item modifiers."
+          }
+        },
+        {
+          "name": "List suppliers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/suppliers", "host": ["{{baseUrl}}"], "path": ["suppliers"] },
+            "description": "Lists suppliers."
+          }
+        },
+        {
+          "name": "List POS devices",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/pos_devices", "host": ["{{baseUrl}}"], "path": ["pos_devices"] },
+            "description": "Lists registered POS devices."
+          }
+        },
+        {
+          "name": "List shifts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/shifts", "host": ["{{baseUrl}}"], "path": ["shifts"] },
+            "description": "Lists cash register shifts."
+          }
+        }
+      ]
+    }
+  ]
+}

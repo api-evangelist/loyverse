@@ -1,0 +1,107 @@
+aid: loyverse
+name: Loyverse
+review:
+  question: Does Loyverse expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Loyverse's public integration surface is
+    a request/response REST API (base https://api.loyverse.com/v1.0) plus
+    outbound webhooks. Webhooks are server-to-endpoint HTTP callbacks (Loyverse
+    POSTs events such as receipts and inventory changes to a URL you register),
+    not a persistent client connection. There is no server-push WebSocket or SSE
+    transport on Loyverse's own API to model, so no AsyncAPI document was created.
+findings:
+  summary: |
+    Loyverse does not publish a documented public WebSocket API. Loyverse is a
+    free point of sale (POS) platform, and its developer API is a REST API over
+    HTTPS at https://api.loyverse.com/v1.0. Authentication is by personal access
+    token (Bearer) or OAuth 2.0 authorization-code flow with scoped permissions.
+    Every documented resource - items, categories, receipts, customers,
+    inventory, stores, employees, payment types, taxes, discounts, modifiers,
+    suppliers, POS devices, and shifts - is exposed as request/response REST with
+    cursor-based pagination. Near-real-time notifications are delivered via
+    outbound webhooks (Loyverse POSTs events to a URL you register; webhooks
+    created through an OAuth app carry an X-Loyverse-Signature header). No
+    realtime, bidirectional, or streaming WebSocket (ws:// or wss://) endpoint is
+    documented anywhere in Loyverse's API reference as of the review date.
+  openSource: |
+    Loyverse's platform and API are not open source. The POS, Dashboard, Kitchen
+    Display, and Customer Display apps are free (proprietary), with paid per-store
+    add-ons. Several third-party open-source client wrappers exist
+    (for example matteobe/loyverse, siarheipashkevich/loyverse-sdk) but these
+    are community libraries, not Loyverse's own code.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.loyverse.com/v1.0
+      documented: true
+      note: Full CRUD REST API for all POS resources with cursor-based pagination.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: Outbound HTTP callbacks for events (e.g. receipts, inventory). Server-to-endpoint POST, not WebSocket. OAuth-created webhooks include X-Loyverse-Signature.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Loyverse's API reference or developer docs as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.loyverse.com/v1.0/items
+    - POST   https://api.loyverse.com/v1.0/items
+    - GET    https://api.loyverse.com/v1.0/items/{item_id}
+    - DELETE https://api.loyverse.com/v1.0/items/{item_id}
+    - GET    https://api.loyverse.com/v1.0/categories
+    - POST   https://api.loyverse.com/v1.0/categories
+    - GET    https://api.loyverse.com/v1.0/categories/{category_id}
+    - DELETE https://api.loyverse.com/v1.0/categories/{category_id}
+    - GET    https://api.loyverse.com/v1.0/receipts
+    - POST   https://api.loyverse.com/v1.0/receipts
+    - GET    https://api.loyverse.com/v1.0/receipts/{receipt_number}
+    - GET    https://api.loyverse.com/v1.0/customers
+    - POST   https://api.loyverse.com/v1.0/customers
+    - GET    https://api.loyverse.com/v1.0/customers/{customer_id}
+    - DELETE https://api.loyverse.com/v1.0/customers/{customer_id}
+    - GET    https://api.loyverse.com/v1.0/inventory
+    - POST   https://api.loyverse.com/v1.0/inventory
+    - GET    https://api.loyverse.com/v1.0/stores
+    - GET    https://api.loyverse.com/v1.0/stores/{store_id}
+    - GET    https://api.loyverse.com/v1.0/employees
+    - POST   https://api.loyverse.com/v1.0/employees
+    - GET    https://api.loyverse.com/v1.0/employees/{employee_id}
+    - DELETE https://api.loyverse.com/v1.0/employees/{employee_id}
+    - GET    https://api.loyverse.com/v1.0/payment_types
+    - GET    https://api.loyverse.com/v1.0/payment_types/{payment_type_id}
+    - GET    https://api.loyverse.com/v1.0/merchants
+    - GET    https://api.loyverse.com/v1.0/taxes
+    - GET    https://api.loyverse.com/v1.0/discounts
+    - GET    https://api.loyverse.com/v1.0/modifiers
+    - GET    https://api.loyverse.com/v1.0/suppliers
+    - GET    https://api.loyverse.com/v1.0/pos_devices
+    - GET    https://api.loyverse.com/v1.0/shifts
+sources:
+  - url: https://developer.loyverse.com/docs/
+    type: Documentation
+    note: Loyverse API reference (single-page dashboard); base URL https://api.loyverse.com/v1.0, all REST. No WebSocket mentioned.
+  - url: https://help.loyverse.com/help/loyverse-api
+    type: Documentation
+    note: How to create personal access tokens; token passed as Bearer, unlimited access to account resources.
+  - url: https://support.loyverse.com/en/articles/8061203-faqs-about-loyverse-api
+    type: Documentation
+    note: API FAQ covering webhooks (three creation methods, X-Loyverse-Signature) and resource examples.
+  - url: https://loyverse.com/loyverse-pos-api
+    type: ProductPage
+    note: POS API marketing page describing item/inventory/order/customer sync use cases.
+  - url: https://github.com/matteobe/loyverse
+    type: SourceCode
+    note: Community open-source Python wrapper (not Loyverse's own code); REST client, no WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Loyverse's own public API is
+    request/response REST (https://api.loyverse.com/v1.0) plus outbound
+    webhooks. No AsyncAPI document was created because there is no server-push
+    or bidirectional streaming transport on Loyverse's own API to model; webhook
+    callbacks are one-shot HTTP POSTs to a consumer endpoint.
