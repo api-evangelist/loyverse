@@ -197,6 +197,8 @@ apis:
     including their roles and store assignments (Employee Management add-on
     features surface here).
 common:
+- type: AgenticAccess
+  url: agentic-access/loyverse-agentic-access.yml
 - type: Authentication
   url: authentication/loyverse-authentication.yml
 - type: LinkedIn

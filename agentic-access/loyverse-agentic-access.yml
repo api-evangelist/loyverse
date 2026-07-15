@@ -1,0 +1,588 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/loyverse-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 32
+  by_action_class:
+    connected: 22
+    acting: 10
+  by_consequence:
+    read: 22
+    write: 10
+  human_in_the_loop_required: 0
+operations:
+- path: /items
+  method: get
+  operationId: listItems
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /items
+  method: post
+  operationId: createOrUpdateItem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /items/{item_id}
+  method: get
+  operationId: getItem
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /items/{item_id}
+  method: delete
+  operationId: deleteItem
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /categories
+  method: get
+  operationId: listCategories
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /categories
+  method: post
+  operationId: createOrUpdateCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /categories/{category_id}
+  method: get
+  operationId: getCategory
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /categories/{category_id}
+  method: delete
+  operationId: deleteCategory
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /receipts
+  method: get
+  operationId: listReceipts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /receipts
+  method: post
+  operationId: createReceipt
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /receipts/{receipt_number}
+  method: get
+  operationId: getReceipt
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /customers
+  method: get
+  operationId: listCustomers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /customers
+  method: post
+  operationId: createOrUpdateCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /customers/{customer_id}
+  method: get
+  operationId: getCustomer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /customers/{customer_id}
+  method: delete
+  operationId: deleteCustomer
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /inventory
+  method: get
+  operationId: getInventoryLevels
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /inventory
+  method: post
+  operationId: updateInventoryLevels
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /stores
+  method: get
+  operationId: listStores
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /stores/{store_id}
+  method: get
+  operationId: getStore
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /employees
+  method: get
+  operationId: listEmployees
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /employees
+  method: post
+  operationId: createOrUpdateEmployee
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /employees/{employee_id}
+  method: get
+  operationId: getEmployee
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /employees/{employee_id}
+  method: delete
+  operationId: deleteEmployee
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /payment_types
+  method: get
+  operationId: listPaymentTypes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /payment_types/{payment_type_id}
+  method: get
+  operationId: getPaymentType
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /merchants
+  method: get
+  operationId: listMerchants
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /taxes
+  method: get
+  operationId: listTaxes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /discounts
+  method: get
+  operationId: listDiscounts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /modifiers
+  method: get
+  operationId: listModifiers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /suppliers
+  method: get
+  operationId: listSuppliers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /pos_devices
+  method: get
+  operationId: listPosDevices
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
+- path: /shifts
+  method: get
+  operationId: listShifts
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+    scope:
+    - CUSTOMERS_READ
+    - INVENTORY_READ
+    - ITEMS_READ
+    - RECEIPTS_READ
+    - STORES_READ
