@@ -1,0 +1,205 @@
+openapi: 3.0.3
+info:
+  title: Loyverse Categories Customers API
+  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+- url: https://api.loyverse.com/v1.0
+  description: Loyverse API
+security:
+- bearerAuth: []
+- oauth2:
+  - ITEMS_READ
+  - RECEIPTS_READ
+  - CUSTOMERS_READ
+  - INVENTORY_READ
+  - STORES_READ
+tags:
+- name: Customers
+  description: Customer directory and loyalty program.
+paths:
+  /customers:
+    get:
+      operationId: listCustomers
+      tags:
+      - Customers
+      summary: List customers
+      parameters:
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A page of customers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateCustomer
+      tags:
+      - Customers
+      summary: Create or update a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: The created or updated customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{customer_id}:
+    parameters:
+    - name: customer_id
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getCustomer
+      tags:
+      - Customers
+      summary: Get a customer
+      responses:
+        '200':
+          description: The customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCustomer
+      tags:
+      - Customers
+      summary: Delete a customer
+      responses:
+        '200':
+          description: Deletion result.
+components:
+  schemas:
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    CustomersPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          customers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Customer'
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        address:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+          nullable: true
+        customer_code:
+          type: string
+          nullable: true
+        note:
+          type: string
+          nullable: true
+        first_visit:
+          type: string
+          format: date-time
+          nullable: true
+        last_visit:
+          type: string
+          format: date-time
+          nullable: true
+        total_visits:
+          type: integer
+        total_spent:
+          type: number
+        total_points:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.

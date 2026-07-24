@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Loyverse Categories Inventory API
+  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+- url: https://api.loyverse.com/v1.0
+  description: Loyverse API
+security:
+- bearerAuth: []
+- oauth2:
+  - ITEMS_READ
+  - RECEIPTS_READ
+  - CUSTOMERS_READ
+  - INVENTORY_READ
+  - STORES_READ
+tags:
+- name: Inventory
+  description: Stock levels per variant and store.
+paths:
+  /inventory:
+    get:
+      operationId: getInventoryLevels
+      tags:
+      - Inventory
+      summary: Get inventory levels
+      description: Returns stock on hand per variant and store.
+      parameters:
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - name: store_id
+        in: query
+        schema:
+          type: string
+      - name: variant_ids
+        in: query
+        schema:
+          type: string
+        description: Comma-separated list of variant ids to filter by.
+      responses:
+        '200':
+          description: A page of inventory levels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: updateInventoryLevels
+      tags:
+      - Inventory
+      summary: Update inventory levels
+      description: Sets stock counts for one or more variant/store pairs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inventory_levels:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InventoryLevel'
+      responses:
+        '200':
+          description: Updated inventory levels.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    InventoryPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          inventory_levels:
+            type: array
+            items:
+              $ref: '#/components/schemas/InventoryLevel'
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    InventoryLevel:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        store_id:
+          type: string
+        in_stock:
+          type: number
+        updated_at:
+          type: string
+          format: date-time
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.

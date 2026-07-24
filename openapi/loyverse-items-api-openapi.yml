@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: Loyverse Categories Items API
+  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+- url: https://api.loyverse.com/v1.0
+  description: Loyverse API
+security:
+- bearerAuth: []
+- oauth2:
+  - ITEMS_READ
+  - RECEIPTS_READ
+  - CUSTOMERS_READ
+  - INVENTORY_READ
+  - STORES_READ
+tags:
+- name: Items
+  description: Product catalog items, variants, SKUs, and pricing.
+paths:
+  /items:
+    get:
+      operationId: listItems
+      tags:
+      - Items
+      summary: List items
+      description: Returns a cursor-paginated list of catalog items and their variants.
+      parameters:
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - name: store_id
+        in: query
+        schema:
+          type: string
+        description: Filter items available in a given store.
+      responses:
+        '200':
+          description: A page of items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateItem
+      tags:
+      - Items
+      summary: Create or update an item
+      description: Creates a new item or updates an existing one when an id is supplied.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: The created or updated item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /items/{item_id}:
+    parameters:
+    - $ref: '#/components/parameters/ItemId'
+    get:
+      operationId: getItem
+      tags:
+      - Items
+      summary: Get an item
+      responses:
+        '200':
+          description: The item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteItem
+      tags:
+      - Items
+      summary: Delete an item
+      responses:
+        '200':
+          description: Deletion result.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    Variant:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        item_id:
+          type: string
+        sku:
+          type: string
+        option1_value:
+          type: string
+          nullable: true
+        default_price:
+          type: number
+          nullable: true
+        cost:
+          type: number
+          nullable: true
+        barcode:
+          type: string
+          nullable: true
+        stores:
+          type: array
+          items:
+            type: object
+            properties:
+              store_id:
+                type: string
+              price:
+                type: number
+                nullable: true
+              available_for_sale:
+                type: boolean
+    ItemsPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Item'
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        handle:
+          type: string
+        item_name:
+          type: string
+        category_id:
+          type: string
+          nullable: true
+        track_stock:
+          type: boolean
+        sold_by_weight:
+          type: boolean
+        is_composite:
+          type: boolean
+        primary_supplier_id:
+          type: string
+          nullable: true
+        tax_ids:
+          type: array
+          items:
+            type: string
+        modifier_ids:
+          type: array
+          items:
+            type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Variant'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.

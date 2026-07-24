@@ -1,0 +1,64 @@
+openapi: 3.0.3
+info:
+  title: Loyverse Categories Suppliers API
+  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+- url: https://api.loyverse.com/v1.0
+  description: Loyverse API
+security:
+- bearerAuth: []
+- oauth2:
+  - ITEMS_READ
+  - RECEIPTS_READ
+  - CUSTOMERS_READ
+  - INVENTORY_READ
+  - STORES_READ
+tags:
+- name: Suppliers
+  description: Suppliers for inventory and purchasing.
+paths:
+  /suppliers:
+    get:
+      operationId: listSuppliers
+      tags:
+      - Suppliers
+      summary: List suppliers
+      responses:
+        '200':
+          description: A page of suppliers.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.

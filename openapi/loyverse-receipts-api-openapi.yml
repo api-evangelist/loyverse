@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: Loyverse Categories Receipts API
+  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+- url: https://api.loyverse.com/v1.0
+  description: Loyverse API
+security:
+- bearerAuth: []
+- oauth2:
+  - ITEMS_READ
+  - RECEIPTS_READ
+  - CUSTOMERS_READ
+  - INVENTORY_READ
+  - STORES_READ
+tags:
+- name: Receipts
+  description: Sales receipts with line items, payments, taxes, and refunds.
+paths:
+  /receipts:
+    get:
+      operationId: listReceipts
+      tags:
+      - Receipts
+      summary: List receipts
+      description: Returns a cursor-paginated list of sales receipts, filterable by store and date range.
+      parameters:
+      - $ref: '#/components/parameters/Cursor'
+      - $ref: '#/components/parameters/Limit'
+      - name: store_id
+        in: query
+        schema:
+          type: string
+      - name: created_at_min
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: created_at_max
+        in: query
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: A page of receipts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiptsPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createReceipt
+      tags:
+      - Receipts
+      summary: Create a receipt
+      description: Creates a sales receipt, used to push external orders into Loyverse as sales.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Receipt'
+      responses:
+        '200':
+          description: The created receipt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /receipts/{receipt_number}:
+    parameters:
+    - name: receipt_number
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: getReceipt
+      tags:
+      - Receipts
+      summary: Get a receipt
+      responses:
+        '200':
+          description: The receipt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ReceiptLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+        item_id:
+          type: string
+        variant_id:
+          type: string
+        item_name:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        gross_total_money:
+          type: number
+        total_money:
+          type: number
+        line_taxes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
+        line_discounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
+    ReceiptsPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          receipts:
+            type: array
+            items:
+              $ref: '#/components/schemas/Receipt'
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    Receipt:
+      type: object
+      properties:
+        receipt_number:
+          type: string
+        receipt_type:
+          type: string
+          description: SALE or REFUND.
+        refund_for:
+          type: string
+          nullable: true
+        order:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        receipt_date:
+          type: string
+          format: date-time
+        store_id:
+          type: string
+        pos_device_id:
+          type: string
+          nullable: true
+        employee_id:
+          type: string
+          nullable: true
+        customer_id:
+          type: string
+          nullable: true
+        total_money:
+          type: number
+        total_tax:
+          type: number
+        points_earned:
+          type: number
+          nullable: true
+        points_deducted:
+          type: number
+          nullable: true
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptLineItem'
+        payments:
+          type: array
+          items:
+            type: object
+            properties:
+              payment_type_id:
+                type: string
+              money_amount:
+                type: number
+              name:
+                type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.
