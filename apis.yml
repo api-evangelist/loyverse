@@ -15,7 +15,20 @@ description: >-
   Authentication is by personal access token (Bearer) or OAuth 2.0
   authorization-code flow with scoped permissions, and webhooks push events such
   as receipts and inventory changes to consumer endpoints.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/loyverse.png
 tags:
 - Point of Sale
 - POS
@@ -29,173 +42,456 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
-- aid: loyverse:loyverse-items-api
-  name: Loyverse Items API
-  tags:
-  - Items
-  - Catalog
-  - Variants
-  - Retail
-  - Inventory
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Items
-  baseURL: https://api.loyverse.com/v1.0
-  properties:
-  - url: https://developer.loyverse.com/docs/
-    type: Documentation
-  - url: https://developer.loyverse.com/docs/#tag/Items
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    Manage the product catalog behind the point of sale - list, create or update,
-    retrieve, and delete items, including their variants, SKUs, pricing,
-    categories, taxes, and modifiers. The core catalog surface for keeping
-    products in sync between Loyverse and e-commerce, ERP, or accounting systems.
 - aid: loyverse:loyverse-categories-api
   name: Loyverse Categories API
+  description: Merchandising categories for items.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
   tags:
   - Categories
-  - Catalog
-  - Merchandising
-  - Retail
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Categories
-  baseURL: https://api.loyverse.com/v1.0
   properties:
-  - url: https://developer.loyverse.com/docs/#tag/Categories
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    List, create or update, retrieve, and delete the merchandising categories
-    used to organize items across the POS and Back Office reporting.
-- aid: loyverse:loyverse-receipts-api
-  name: Loyverse Receipts API
-  tags:
-  - Receipts
-  - Sales
-  - Orders
-  - Transactions
-  - Point of Sale
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Receipts
-  baseURL: https://api.loyverse.com/v1.0
-  properties:
-  - url: https://developer.loyverse.com/docs/#tag/Receipts
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    Read sales history and post new sales - list receipts (with line items,
-    payments, taxes, discounts, and refunds), retrieve a single receipt by
-    number, and create receipts to push orders from e-commerce and delivery
-    platforms into Loyverse as sales.
+  - type: OpenAPI
+    url: openapi/loyverse-categories-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
 - aid: loyverse:loyverse-customers-api
   name: Loyverse Customers API
+  description: Customer directory and loyalty program.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
   tags:
   - Customers
-  - Loyalty
-  - CRM
-  - Marketing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Customers
-  baseURL: https://api.loyverse.com/v1.0
   properties:
-  - url: https://developer.loyverse.com/docs/#tag/Customers
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    Manage the customer directory and loyalty program - list, create or update,
-    retrieve, and delete customers along with their contact details, total
-    visits and spend, and loyalty points, to sync CRM data and run personalized
-    campaigns.
-- aid: loyverse:loyverse-inventory-api
-  name: Loyverse Inventory API
+  - type: OpenAPI
+    url: openapi/loyverse-customers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-discounts-api
+  name: Loyverse Discounts API
+  description: Discount definitions applied at the POS.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
   tags:
-  - Inventory
-  - Stock Levels
-  - Retail
-  - Warehousing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Inventory
-  baseURL: https://api.loyverse.com/v1.0
+  - Discounts
   properties:
-  - url: https://developer.loyverse.com/docs/#tag/Inventory
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    Read and set stock on hand per item variant and store - get inventory levels
-    and post updated counts to keep stock synchronized across Loyverse and other
-    platforms such as online stores and warehouses.
-- aid: loyverse:loyverse-stores-api
-  name: Loyverse Stores API
-  tags:
-  - Stores
-  - Locations
-  - Multi-Location
-  - Retail
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Stores
-  baseURL: https://api.loyverse.com/v1.0
-  properties:
-  - url: https://developer.loyverse.com/docs/#tag/Stores
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    List and retrieve the merchant's stores (locations), providing the store_id
-    values that scope receipts, inventory, POS devices, and employees across a
-    multi-location business.
+  - type: OpenAPI
+    url: openapi/loyverse-discounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
 - aid: loyverse:loyverse-employees-api
   name: Loyverse Employees API
+  description: Employees who operate the POS.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
   tags:
   - Employees
-  - Staff
-  - Access Control
-  - Point of Sale
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://developer.loyverse.com/docs/#tag/Employees
-  baseURL: https://api.loyverse.com/v1.0
   properties:
-  - url: https://developer.loyverse.com/docs/#tag/Employees
-    type: APIReference
-  - url: openapi/loyverse-openapi.yml
-    type: OpenAPI
-  - url: collections/loyverse.postman_collection.json
-    type: PostmanCollection
-  - url: collections/loyverse.opencollection.json
-    type: OpenCollection
-  description: >-
-    List, create or update, retrieve, and delete employees who operate the POS,
-    including their roles and store assignments (Employee Management add-on
-    features surface here).
+  - type: OpenAPI
+    url: openapi/loyverse-employees-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-inventory-api
+  name: Loyverse Inventory API
+  description: Stock levels per variant and store.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Inventory
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-inventory-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-items-api
+  name: Loyverse Items API
+  description: Product catalog items, variants, SKUs, and pricing.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-items-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-merchants-api
+  name: Loyverse Merchants API
+  description: Merchant account information.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Merchants
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-merchants-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-modifiers-api
+  name: Loyverse Modifiers API
+  description: Item modifiers and options.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Modifiers
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-modifiers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-payment-types-api
+  name: Loyverse Payment Types API
+  description: Configured payment types.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Payment Types
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-payment-types-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-pos-devices-api
+  name: Loyverse POS Devices API
+  description: Registered POS devices per store.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - POS Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-pos-devices-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-receipts-api
+  name: Loyverse Receipts API
+  description: Sales receipts with line items, payments, taxes, and refunds.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Receipts
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-receipts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-shifts-api
+  name: Loyverse Shifts API
+  description: Cash register shifts.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Shifts
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-shifts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-stores-api
+  name: Loyverse Stores API
+  description: Merchant stores (locations).
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Stores
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-stores-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-suppliers-api
+  name: Loyverse Suppliers API
+  description: Suppliers for inventory and purchasing.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Suppliers
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-suppliers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
+- aid: loyverse:loyverse-taxes-api
+  name: Loyverse Taxes API
+  description: Tax definitions applied to items.
+  humanURL: https://developer.loyverse.com/docs/#tag/Items
+  baseURL: https://api.loyverse.com/v1.0
+  tags:
+  - Taxes
+  properties:
+  - type: OpenAPI
+    url: openapi/loyverse-taxes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.loyverse.com/docs/
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Items
+  - type: PostmanCollection
+    url: collections/loyverse.postman_collection.json
+  - type: OpenCollection
+    url: collections/loyverse.opencollection.json
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Categories
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Receipts
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Customers
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Inventory
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Stores
+  - type: APIReference
+    url: https://developer.loyverse.com/docs/#tag/Employees
 common:
 - type: AgenticAccess
   url: agentic-access/loyverse-agentic-access.yml
