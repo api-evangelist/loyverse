@@ -1,0 +1,42 @@
+{
+  "provider": "loyverse",
+  "sources": [
+    "loyverse-categories-api-openapi.yml",
+    "loyverse-customers-api-openapi.yml",
+    "loyverse-discounts-api-openapi.yml",
+    "loyverse-employees-api-openapi.yml",
+    "loyverse-inventory-api-openapi.yml",
+    "loyverse-items-api-openapi.yml",
+    "loyverse-merchants-api-openapi.yml",
+    "loyverse-modifiers-api-openapi.yml",
+    "loyverse-payment-types-api-openapi.yml",
+    "loyverse-pos-devices-api-openapi.yml",
+    "loyverse-receipts-api-openapi.yml",
+    "loyverse-shifts-api-openapi.yml",
+    "loyverse-stores-api-openapi.yml",
+    "loyverse-suppliers-api-openapi.yml",
+    "loyverse-taxes-api-openapi.yml"
+  ],
+  "outputs": [
+    "loyverse-categories-api-openapi.yml",
+    "loyverse-customers-api-openapi.yml",
+    "loyverse-discounts-api-openapi.yml",
+    "loyverse-employees-api-openapi.yml",
+    "loyverse-inventory-api-openapi.yml",
+    "loyverse-items-api-openapi.yml",
+    "loyverse-merchants-api-openapi.yml",
+    "loyverse-modifiers-api-openapi.yml",
+    "loyverse-payment-types-api-openapi.yml",
+    "loyverse-pos-devices-api-openapi.yml",
+    "loyverse-receipts-api-openapi.yml",
+    "loyverse-shifts-api-openapi.yml",
+    "loyverse-stores-api-openapi.yml",
+    "loyverse-suppliers-api-openapi.yml",
+    "loyverse-taxes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

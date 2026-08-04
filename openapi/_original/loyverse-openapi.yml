@@ -1,0 +1,967 @@
+openapi: 3.0.3
+info:
+  title: Loyverse API
+  description: >-
+    REST API for the Loyverse point of sale (POS) platform. Loyverse is a free
+    POS for small retail stores, cafes, bars, and restaurants; this API exposes
+    the same data as the POS and Back Office - items and variants, categories,
+    receipts (sales), customers and loyalty, inventory levels, stores, employees,
+    payment types, taxes, discounts, modifiers, suppliers, POS devices, and
+    shifts. All endpoints are HTTPS REST with cursor-based pagination.
+    Authenticate with a personal access token (Bearer) generated in the Back
+    Office, or with the OAuth 2.0 authorization-code flow for third-party apps
+    acting on behalf of other merchants. This document is derived from the public
+    Loyverse API reference and grounds real endpoints; request and response
+    schemas are summarized and should be verified against the live reference
+    during reconciliation.
+  version: '1.0'
+  contact:
+    name: Loyverse Developers
+    url: https://developer.loyverse.com/docs/
+  x-logo:
+    url: https://loyverse.com
+servers:
+  - url: https://api.loyverse.com/v1.0
+    description: Loyverse API
+security:
+  - bearerAuth: []
+  - oauth2:
+      - ITEMS_READ
+      - RECEIPTS_READ
+      - CUSTOMERS_READ
+      - INVENTORY_READ
+      - STORES_READ
+tags:
+  - name: Items
+    description: Product catalog items, variants, SKUs, and pricing.
+  - name: Categories
+    description: Merchandising categories for items.
+  - name: Receipts
+    description: Sales receipts with line items, payments, taxes, and refunds.
+  - name: Customers
+    description: Customer directory and loyalty program.
+  - name: Inventory
+    description: Stock levels per variant and store.
+  - name: Stores
+    description: Merchant stores (locations).
+  - name: Employees
+    description: Employees who operate the POS.
+  - name: Payment Types
+    description: Configured payment types.
+  - name: Merchants
+    description: Merchant account information.
+  - name: Taxes
+    description: Tax definitions applied to items.
+  - name: Discounts
+    description: Discount definitions applied at the POS.
+  - name: Modifiers
+    description: Item modifiers and options.
+  - name: Suppliers
+    description: Suppliers for inventory and purchasing.
+  - name: POS Devices
+    description: Registered POS devices per store.
+  - name: Shifts
+    description: Cash register shifts.
+paths:
+  /items:
+    get:
+      operationId: listItems
+      tags: [Items]
+      summary: List items
+      description: Returns a cursor-paginated list of catalog items and their variants.
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: store_id
+          in: query
+          schema:
+            type: string
+          description: Filter items available in a given store.
+      responses:
+        '200':
+          description: A page of items.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemsPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateItem
+      tags: [Items]
+      summary: Create or update an item
+      description: Creates a new item or updates an existing one when an id is supplied.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+      responses:
+        '200':
+          description: The created or updated item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /items/{item_id}:
+    parameters:
+      - $ref: '#/components/parameters/ItemId'
+    get:
+      operationId: getItem
+      tags: [Items]
+      summary: Get an item
+      responses:
+        '200':
+          description: The item.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Item'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteItem
+      tags: [Items]
+      summary: Delete an item
+      responses:
+        '200':
+          description: Deletion result.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /categories:
+    get:
+      operationId: listCategories
+      tags: [Categories]
+      summary: List categories
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A page of categories.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateCategory
+      tags: [Categories]
+      summary: Create or update a category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: The created or updated category.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /categories/{category_id}:
+    parameters:
+      - name: category_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getCategory
+      tags: [Categories]
+      summary: Get a category
+      responses:
+        '200':
+          description: The category.
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCategory
+      tags: [Categories]
+      summary: Delete a category
+      responses:
+        '200':
+          description: Deletion result.
+  /receipts:
+    get:
+      operationId: listReceipts
+      tags: [Receipts]
+      summary: List receipts
+      description: Returns a cursor-paginated list of sales receipts, filterable by store and date range.
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: store_id
+          in: query
+          schema:
+            type: string
+        - name: created_at_min
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: created_at_max
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: A page of receipts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReceiptsPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createReceipt
+      tags: [Receipts]
+      summary: Create a receipt
+      description: Creates a sales receipt, used to push external orders into Loyverse as sales.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Receipt'
+      responses:
+        '200':
+          description: The created receipt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /receipts/{receipt_number}:
+    parameters:
+      - name: receipt_number
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getReceipt
+      tags: [Receipts]
+      summary: Get a receipt
+      responses:
+        '200':
+          description: The receipt.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Receipt'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customers:
+    get:
+      operationId: listCustomers
+      tags: [Customers]
+      summary: List customers
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A page of customers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomersPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateCustomer
+      tags: [Customers]
+      summary: Create or update a customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+      responses:
+        '200':
+          description: The created or updated customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /customers/{customer_id}:
+    parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getCustomer
+      tags: [Customers]
+      summary: Get a customer
+      responses:
+        '200':
+          description: The customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteCustomer
+      tags: [Customers]
+      summary: Delete a customer
+      responses:
+        '200':
+          description: Deletion result.
+  /inventory:
+    get:
+      operationId: getInventoryLevels
+      tags: [Inventory]
+      summary: Get inventory levels
+      description: Returns stock on hand per variant and store.
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+        - name: store_id
+          in: query
+          schema:
+            type: string
+        - name: variant_ids
+          in: query
+          schema:
+            type: string
+          description: Comma-separated list of variant ids to filter by.
+      responses:
+        '200':
+          description: A page of inventory levels.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: updateInventoryLevels
+      tags: [Inventory]
+      summary: Update inventory levels
+      description: Sets stock counts for one or more variant/store pairs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inventory_levels:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InventoryLevel'
+      responses:
+        '200':
+          description: Updated inventory levels.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /stores:
+    get:
+      operationId: listStores
+      tags: [Stores]
+      summary: List stores
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A page of stores.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoresPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /stores/{store_id}:
+    parameters:
+      - name: store_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getStore
+      tags: [Stores]
+      summary: Get a store
+      responses:
+        '200':
+          description: The store.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /employees:
+    get:
+      operationId: listEmployees
+      tags: [Employees]
+      summary: List employees
+      parameters:
+        - $ref: '#/components/parameters/Cursor'
+        - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: A page of employees.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createOrUpdateEmployee
+      tags: [Employees]
+      summary: Create or update an employee
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+      responses:
+        '200':
+          description: The created or updated employee.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /employees/{employee_id}:
+    parameters:
+      - name: employee_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getEmployee
+      tags: [Employees]
+      summary: Get an employee
+      responses:
+        '200':
+          description: The employee.
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteEmployee
+      tags: [Employees]
+      summary: Delete an employee
+      responses:
+        '200':
+          description: Deletion result.
+  /payment_types:
+    get:
+      operationId: listPaymentTypes
+      tags: [Payment Types]
+      summary: List payment types
+      responses:
+        '200':
+          description: A page of payment types.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /payment_types/{payment_type_id}:
+    parameters:
+      - name: payment_type_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: getPaymentType
+      tags: [Payment Types]
+      summary: Get a payment type
+      responses:
+        '200':
+          description: The payment type.
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /merchants:
+    get:
+      operationId: listMerchants
+      tags: [Merchants]
+      summary: Get merchant information
+      responses:
+        '200':
+          description: Merchant account information.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /taxes:
+    get:
+      operationId: listTaxes
+      tags: [Taxes]
+      summary: List taxes
+      responses:
+        '200':
+          description: A page of taxes.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /discounts:
+    get:
+      operationId: listDiscounts
+      tags: [Discounts]
+      summary: List discounts
+      responses:
+        '200':
+          description: A page of discounts.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /modifiers:
+    get:
+      operationId: listModifiers
+      tags: [Modifiers]
+      summary: List modifiers
+      responses:
+        '200':
+          description: A page of modifiers.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /suppliers:
+    get:
+      operationId: listSuppliers
+      tags: [Suppliers]
+      summary: List suppliers
+      responses:
+        '200':
+          description: A page of suppliers.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /pos_devices:
+    get:
+      operationId: listPosDevices
+      tags: [POS Devices]
+      summary: List POS devices
+      responses:
+        '200':
+          description: A page of POS devices.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /shifts:
+    get:
+      operationId: listShifts
+      tags: [Shifts]
+      summary: List shifts
+      responses:
+        '200':
+          description: A page of cash register shifts.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token generated in the Loyverse Back Office (Access Tokens).
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.loyverse.com/oauth/authorize
+          tokenUrl: https://api.loyverse.com/oauth/token
+          scopes:
+            ITEMS_READ: Read items and catalog objects.
+            ITEMS_WRITE: Create and update items and catalog objects.
+            RECEIPTS_READ: Read receipts.
+            RECEIPTS_WRITE: Create receipts.
+            CUSTOMERS_READ: Read customers and loyalty data.
+            CUSTOMERS_WRITE: Create and update customers.
+            INVENTORY_READ: Read inventory levels.
+            INVENTORY_WRITE: Update inventory levels.
+            EMPLOYEES_READ: Read employees.
+            PAYMENT_TYPES_READ: Read payment types.
+            STORES_READ: Read stores.
+            MERCHANT_READ: Read merchant and store information.
+  parameters:
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
+  schemas:
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type: string
+          nullable: true
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        handle:
+          type: string
+        item_name:
+          type: string
+        category_id:
+          type: string
+          nullable: true
+        track_stock:
+          type: boolean
+        sold_by_weight:
+          type: boolean
+        is_composite:
+          type: boolean
+        primary_supplier_id:
+          type: string
+          nullable: true
+        tax_ids:
+          type: array
+          items:
+            type: string
+        modifier_ids:
+          type: array
+          items:
+            type: string
+        variants:
+          type: array
+          items:
+            $ref: '#/components/schemas/Variant'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    Variant:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        item_id:
+          type: string
+        sku:
+          type: string
+        option1_value:
+          type: string
+          nullable: true
+        default_price:
+          type: number
+          nullable: true
+        cost:
+          type: number
+          nullable: true
+        barcode:
+          type: string
+          nullable: true
+        stores:
+          type: array
+          items:
+            type: object
+            properties:
+              store_id:
+                type: string
+              price:
+                type: number
+                nullable: true
+              available_for_sale:
+                type: boolean
+    ItemsPage:
+      allOf:
+        - $ref: '#/components/schemas/Cursorable'
+        - type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/Item'
+    Category:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    Receipt:
+      type: object
+      properties:
+        receipt_number:
+          type: string
+        receipt_type:
+          type: string
+          description: SALE or REFUND.
+        refund_for:
+          type: string
+          nullable: true
+        order:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        receipt_date:
+          type: string
+          format: date-time
+        store_id:
+          type: string
+        pos_device_id:
+          type: string
+          nullable: true
+        employee_id:
+          type: string
+          nullable: true
+        customer_id:
+          type: string
+          nullable: true
+        total_money:
+          type: number
+        total_tax:
+          type: number
+        points_earned:
+          type: number
+          nullable: true
+        points_deducted:
+          type: number
+          nullable: true
+        line_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceiptLineItem'
+        payments:
+          type: array
+          items:
+            type: object
+            properties:
+              payment_type_id:
+                type: string
+              money_amount:
+                type: number
+              name:
+                type: string
+    ReceiptLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+        item_id:
+          type: string
+        variant_id:
+          type: string
+        item_name:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        gross_total_money:
+          type: number
+        total_money:
+          type: number
+        line_taxes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
+        line_discounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
+    ReceiptsPage:
+      allOf:
+        - $ref: '#/components/schemas/Cursorable'
+        - type: object
+          properties:
+            receipts:
+              type: array
+              items:
+                $ref: '#/components/schemas/Receipt'
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        address:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+          nullable: true
+        customer_code:
+          type: string
+          nullable: true
+        note:
+          type: string
+          nullable: true
+        first_visit:
+          type: string
+          format: date-time
+          nullable: true
+        last_visit:
+          type: string
+          format: date-time
+          nullable: true
+        total_visits:
+          type: integer
+        total_spent:
+          type: number
+        total_points:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    CustomersPage:
+      allOf:
+        - $ref: '#/components/schemas/Cursorable'
+        - type: object
+          properties:
+            customers:
+              type: array
+              items:
+                $ref: '#/components/schemas/Customer'
+    InventoryLevel:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        store_id:
+          type: string
+        in_stock:
+          type: number
+        updated_at:
+          type: string
+          format: date-time
+    InventoryPage:
+      allOf:
+        - $ref: '#/components/schemas/Cursorable'
+        - type: object
+          properties:
+            inventory_levels:
+              type: array
+              items:
+                $ref: '#/components/schemas/InventoryLevel'
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        address:
+          type: string
+          nullable: true
+        city:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        postal_code:
+          type: string
+          nullable: true
+        country_code:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+    StoresPage:
+      allOf:
+        - $ref: '#/components/schemas/Cursorable'
+        - type: object
+          properties:
+            stores:
+              type: array
+              items:
+                $ref: '#/components/schemas/Store'
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+          nullable: true
+        phone_number:
+          type: string
+          nullable: true
+        stores:
+          type: array
+          items:
+            type: string
+        is_owner:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
