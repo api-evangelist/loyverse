@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories POS Devices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "POS Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List POS devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/pos_devices"
+          },
+          "docs": "List POS devices"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

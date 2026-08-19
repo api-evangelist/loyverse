@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Taxes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Taxes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List taxes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/taxes"
+          },
+          "docs": "List taxes"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

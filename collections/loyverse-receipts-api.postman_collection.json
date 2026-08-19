@@ -1,0 +1,515 @@
+{
+  "item": [
+    {
+      "id": "14d72f7b-9852-4107-b2ea-c3b45a7cb9ac",
+      "name": "Receipts",
+      "description": {
+        "content": "Sales receipts with line items, payments, taxes, and refunds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c2f9f175-86bc-42cb-8073-995fb88408d1",
+          "name": "List receipts",
+          "request": {
+            "name": "List receipts",
+            "description": {
+              "content": "Returns a cursor-paginated list of sales receipts, filterable by store and date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "receipts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor for the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "store_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_min",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at_max",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5fea160-d875-4fd9-97f3-c83cd50f91e2",
+              "name": "A page of receipts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_min",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at_max",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cursor\": \"string\",\n  \"receipts\": [\n    {\n      \"receipt_number\": \"string\",\n      \"receipt_type\": \"string\",\n      \"refund_for\": \"string\",\n      \"order\": \"string\",\n      \"created_at\": \"1959-12-14T13:32:01.980Z\",\n      \"receipt_date\": \"1956-01-22T08:26:12.879Z\",\n      \"store_id\": \"string\",\n      \"pos_device_id\": \"string\",\n      \"employee_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"total_money\": 4568.601715151372,\n      \"total_tax\": 9579.911979704346,\n      \"points_earned\": 3396.9324425781133,\n      \"points_deducted\": 2444.375507093769,\n      \"line_items\": [\n        {\n          \"id\": \"string\",\n          \"item_id\": \"string\",\n          \"variant_id\": \"string\",\n          \"item_name\": \"string\",\n          \"quantity\": 1668.6000104719778,\n          \"price\": 1521.720962264106,\n          \"gross_total_money\": 3034.8461213782675,\n          \"total_money\": 7095.028726451022,\n          \"line_taxes\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"line_discounts\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"item_id\": \"string\",\n          \"variant_id\": \"string\",\n          \"item_name\": \"string\",\n          \"quantity\": 127.11532438652861,\n          \"price\": 4067.6374253108183,\n          \"gross_total_money\": 565.9550932565082,\n          \"total_money\": 6824.189219193721,\n          \"line_taxes\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"line_discounts\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"payments\": [\n        {\n          \"payment_type_id\": \"string\",\n          \"money_amount\": 4602.5808611439725,\n          \"name\": \"string\"\n        },\n        {\n          \"payment_type_id\": \"string\",\n          \"money_amount\": 5684.539460667711,\n          \"name\": \"string\"\n        }\n      ]\n    },\n    {\n      \"receipt_number\": \"string\",\n      \"receipt_type\": \"string\",\n      \"refund_for\": \"string\",\n      \"order\": \"string\",\n      \"created_at\": \"2013-01-24T18:46:04.520Z\",\n      \"receipt_date\": \"1968-09-06T07:07:06.008Z\",\n      \"store_id\": \"string\",\n      \"pos_device_id\": \"string\",\n      \"employee_id\": \"string\",\n      \"customer_id\": \"string\",\n      \"total_money\": 1768.1292418063333,\n      \"total_tax\": 7681.2446996189165,\n      \"points_earned\": 4652.546609343267,\n      \"points_deducted\": 1523.6910198441867,\n      \"line_items\": [\n        {\n          \"id\": \"string\",\n          \"item_id\": \"string\",\n          \"variant_id\": \"string\",\n          \"item_name\": \"string\",\n          \"quantity\": 93.37080419140497,\n          \"price\": 6578.731697897556,\n          \"gross_total_money\": 7742.466333292817,\n          \"total_money\": 8584.785301807215,\n          \"line_taxes\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"line_discounts\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"id\": \"string\",\n          \"item_id\": \"string\",\n          \"variant_id\": \"string\",\n          \"item_name\": \"string\",\n          \"quantity\": 5990.541977415638,\n          \"price\": 5943.973373368862,\n          \"gross_total_money\": 926.5556817975873,\n          \"total_money\": 3120.2851685980118,\n          \"line_taxes\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"line_discounts\": [\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"money_amount\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"payments\": [\n        {\n          \"payment_type_id\": \"string\",\n          \"money_amount\": 7203.798149508864,\n          \"name\": \"string\"\n        },\n        {\n          \"payment_type_id\": \"string\",\n          \"money_amount\": 8701.140322612286,\n          \"name\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2beb264e-5661-40d1-845f-04d2ad9b9c64",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "created_at_min",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_at_max",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10ef01a3-2d76-42b6-9330-dc5e1db54678",
+          "name": "Create a receipt",
+          "request": {
+            "name": "Create a receipt",
+            "description": {
+              "content": "Creates a sales receipt, used to push external orders into Loyverse as sales.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "receipts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_number\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"refund_for\": \"<string>\",\n  \"order\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"receipt_date\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"pos_device_id\": \"<string>\",\n  \"employee_id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"total_money\": \"<number>\",\n  \"total_tax\": \"<number>\",\n  \"points_earned\": \"<number>\",\n  \"points_deducted\": \"<number>\",\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"payments\": [\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae3d1a63-994d-4aa0-aee4-66a0cb037898",
+              "name": "The created receipt.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_number\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"refund_for\": \"<string>\",\n  \"order\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"receipt_date\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"pos_device_id\": \"<string>\",\n  \"employee_id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"total_money\": \"<number>\",\n  \"total_tax\": \"<number>\",\n  \"points_earned\": \"<number>\",\n  \"points_deducted\": \"<number>\",\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"payments\": [\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receipt_number\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"refund_for\": \"<string>\",\n  \"order\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"receipt_date\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"pos_device_id\": \"<string>\",\n  \"employee_id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"total_money\": \"<number>\",\n  \"total_tax\": \"<number>\",\n  \"points_earned\": \"<number>\",\n  \"points_deducted\": \"<number>\",\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"payments\": [\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b88625d-e58a-4d93-8966-9280b413c7fe",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"receipt_number\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"refund_for\": \"<string>\",\n  \"order\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"receipt_date\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"pos_device_id\": \"<string>\",\n  \"employee_id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"total_money\": \"<number>\",\n  \"total_tax\": \"<number>\",\n  \"points_earned\": \"<number>\",\n  \"points_deducted\": \"<number>\",\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"payments\": [\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bf77bd8-5bdb-4ccf-8ca4-2f7442c121cb",
+          "name": "Get a receipt",
+          "request": {
+            "name": "Get a receipt",
+            "description": {},
+            "url": {
+              "path": [
+                "receipts",
+                ":receipt_number"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "receipt_number",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "befda093-52d3-4ca0-980e-d83c243e6b2c",
+              "name": "The receipt.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts",
+                    ":receipt_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_number",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"receipt_number\": \"<string>\",\n  \"receipt_type\": \"<string>\",\n  \"refund_for\": \"<string>\",\n  \"order\": \"<string>\",\n  \"created_at\": \"<dateTime>\",\n  \"receipt_date\": \"<dateTime>\",\n  \"store_id\": \"<string>\",\n  \"pos_device_id\": \"<string>\",\n  \"employee_id\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"total_money\": \"<number>\",\n  \"total_tax\": \"<number>\",\n  \"points_earned\": \"<number>\",\n  \"points_deducted\": \"<number>\",\n  \"line_items\": [\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"variant_id\": \"<string>\",\n      \"item_name\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"price\": \"<number>\",\n      \"gross_total_money\": \"<number>\",\n      \"total_money\": \"<number>\",\n      \"line_taxes\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ],\n      \"line_discounts\": [\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"money_amount\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"payments\": [\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"payment_type_id\": \"<string>\",\n      \"money_amount\": \"<number>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27c62329-4943-401a-877e-aa0fae7d668a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "receipts",
+                    ":receipt_number"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "receipt_number",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loyverse.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4dcf5984-9b40-425e-95fe-83fc5767c06f",
+    "name": "Loyverse Categories Receipts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.\n\nContact Support:\n Name: Loyverse Developers",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Receipts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Receipts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List receipts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/receipts",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor for the next page of results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page."
+              },
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at_min",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "created_at_max",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a cursor-paginated list of sales receipts, filterable by store and date range."
+        },
+        {
+          "info": {
+            "name": "Create a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/receipts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a sales receipt, used to push external orders into Loyverse as sales."
+        },
+        {
+          "info": {
+            "name": "Get a receipt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/receipts/:receipt_number",
+            "params": [
+              {
+                "name": "receipt_number",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a receipt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

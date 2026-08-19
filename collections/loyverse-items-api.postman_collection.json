@@ -1,0 +1,669 @@
+{
+  "item": [
+    {
+      "id": "49aaa65a-fea4-48d4-ab7a-c0ff09ad7ca3",
+      "name": "Items",
+      "description": {
+        "content": "Product catalog items, variants, SKUs, and pricing.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a34a4a9-8afb-45f7-abdd-84e2dffd2577",
+          "name": "List items",
+          "request": {
+            "name": "List items",
+            "description": {
+              "content": "Returns a cursor-paginated list of catalog items and their variants.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "Opaque cursor for the next page of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "Maximum number of records to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "store_id",
+                  "value": "<string>",
+                  "description": "Filter items available in a given store."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb6550e3-e888-449a-82eb-5b6889a12fbb",
+              "name": "A page of items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cursor\": \"string\",\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"handle\": \"string\",\n      \"item_name\": \"string\",\n      \"category_id\": \"string\",\n      \"track_stock\": true,\n      \"sold_by_weight\": true,\n      \"is_composite\": false,\n      \"primary_supplier_id\": \"string\",\n      \"tax_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"modifier_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"variants\": [\n        {\n          \"variant_id\": \"string\",\n          \"item_id\": \"string\",\n          \"sku\": \"string\",\n          \"option1_value\": \"string\",\n          \"default_price\": 5845.304250306956,\n          \"cost\": 2868.2704348804987,\n          \"barcode\": \"string\",\n          \"stores\": [\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"variant_id\": \"string\",\n          \"item_id\": \"string\",\n          \"sku\": \"string\",\n          \"option1_value\": \"string\",\n          \"default_price\": 9152.664053506007,\n          \"cost\": 448.4046224918592,\n          \"barcode\": \"string\",\n          \"stores\": [\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"created_at\": \"1969-11-10T22:04:14.304Z\",\n      \"updated_at\": \"1986-03-13T18:44:33.099Z\",\n      \"deleted_at\": \"1954-09-12T11:44:15.451Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"handle\": \"string\",\n      \"item_name\": \"string\",\n      \"category_id\": \"string\",\n      \"track_stock\": false,\n      \"sold_by_weight\": true,\n      \"is_composite\": false,\n      \"primary_supplier_id\": \"string\",\n      \"tax_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"modifier_ids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"variants\": [\n        {\n          \"variant_id\": \"string\",\n          \"item_id\": \"string\",\n          \"sku\": \"string\",\n          \"option1_value\": \"string\",\n          \"default_price\": 3321.0522057216276,\n          \"cost\": 6457.143248443799,\n          \"barcode\": \"string\",\n          \"stores\": [\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"variant_id\": \"string\",\n          \"item_id\": \"string\",\n          \"sku\": \"string\",\n          \"option1_value\": \"string\",\n          \"default_price\": 3779.152530956547,\n          \"cost\": 6988.5133467878595,\n          \"barcode\": \"string\",\n          \"stores\": [\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"store_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"price\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"available_for_sale\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ],\n      \"created_at\": \"1983-08-26T10:33:15.558Z\",\n      \"updated_at\": \"1970-08-08T11:20:13.282Z\",\n      \"deleted_at\": \"2018-07-05T01:20:45.694Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "619345e7-8dc8-453f-84a5-8beeda9b90a3",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "store_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78a43099-4dcf-4956-9715-c5dd203f3663",
+          "name": "Create or update an item",
+          "request": {
+            "name": "Create or update an item",
+            "description": {
+              "content": "Creates a new item or updates an existing one when an id is supplied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"item_name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"track_stock\": \"<boolean>\",\n  \"sold_by_weight\": \"<boolean>\",\n  \"is_composite\": \"<boolean>\",\n  \"primary_supplier_id\": \"<string>\",\n  \"tax_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"modifier_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variants\": [\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5cd00e02-93de-4dd8-9c1f-b0a5007fa6fd",
+              "name": "The created or updated item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"item_name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"track_stock\": \"<boolean>\",\n  \"sold_by_weight\": \"<boolean>\",\n  \"is_composite\": \"<boolean>\",\n  \"primary_supplier_id\": \"<string>\",\n  \"tax_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"modifier_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variants\": [\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"item_name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"track_stock\": \"<boolean>\",\n  \"sold_by_weight\": \"<boolean>\",\n  \"is_composite\": \"<boolean>\",\n  \"primary_supplier_id\": \"<string>\",\n  \"tax_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"modifier_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variants\": [\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d4e4878-af35-4a80-be38-fd2b8aedec84",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"item_name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"track_stock\": \"<boolean>\",\n  \"sold_by_weight\": \"<boolean>\",\n  \"is_composite\": \"<boolean>\",\n  \"primary_supplier_id\": \"<string>\",\n  \"tax_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"modifier_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variants\": [\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "92e8a416-cffa-4dbe-8449-62cff4bb759b",
+          "name": "Get an item",
+          "request": {
+            "name": "Get an item",
+            "description": {},
+            "url": {
+              "path": [
+                "items",
+                ":item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2aa8d0b-7efb-48f5-aa14-1f9318c20eb6",
+              "name": "The item.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"item_name\": \"<string>\",\n  \"category_id\": \"<string>\",\n  \"track_stock\": \"<boolean>\",\n  \"sold_by_weight\": \"<boolean>\",\n  \"is_composite\": \"<boolean>\",\n  \"primary_supplier_id\": \"<string>\",\n  \"tax_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"modifier_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"variants\": [\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"variant_id\": \"<string>\",\n      \"item_id\": \"<string>\",\n      \"sku\": \"<string>\",\n      \"option1_value\": \"<string>\",\n      \"default_price\": \"<number>\",\n      \"cost\": \"<number>\",\n      \"barcode\": \"<string>\",\n      \"stores\": [\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        },\n        {\n          \"store_id\": \"<string>\",\n          \"price\": \"<number>\",\n          \"available_for_sale\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"deleted_at\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d170c1a6-bbbc-4429-bb3b-0618aae66d65",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc2a6bd2-cccc-4f5b-be7c-6d1c0448b80a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0054f7c9-605b-4f66-b87a-2a7ce65ec8d5",
+          "name": "Delete an item",
+          "request": {
+            "name": "Delete an item",
+            "description": {},
+            "url": {
+              "path": [
+                "items",
+                ":item_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "item_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1c9dc4f-00d9-4321-a5a1-8471600af93d",
+              "name": "Deletion result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "782bf35d-62bb-4f52-9020-f3ae13f86a55",
+              "name": "Missing or invalid access token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "items",
+                    ":item_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "item_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.loyverse.com/v1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7fcc4a0c-9331-4dab-8d06-eab329e6b520",
+    "name": "Loyverse Categories Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.\n\nContact Support:\n Name: Loyverse Developers",
+      "type": "text/plain"
+    }
+  }
+}

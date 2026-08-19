@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Items API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/items",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor for the next page of results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page."
+              },
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter items available in a given store."
+              }
+            ]
+          },
+          "docs": "Returns a cursor-paginated list of catalog items and their variants."
+        },
+        {
+          "info": {
+            "name": "Create or update an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/items",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new item or updates an existing one when an id is supplied."
+        },
+        {
+          "info": {
+            "name": "Get an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/items/:item_id",
+            "params": [
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an item"
+        },
+        {
+          "info": {
+            "name": "Delete an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/items/:item_id",
+            "params": [
+              {
+                "name": "item_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an item"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

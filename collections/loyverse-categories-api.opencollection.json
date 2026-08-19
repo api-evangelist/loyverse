@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Categories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/categories",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor for the next page of results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page."
+              }
+            ]
+          },
+          "docs": "List categories"
+        },
+        {
+          "info": {
+            "name": "Create or update a category",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/categories",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update a category"
+        },
+        {
+          "info": {
+            "name": "Get a category",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/categories/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a category"
+        },
+        {
+          "info": {
+            "name": "Delete a category",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.loyverse.com/v1.0/categories/:category_id",
+            "params": [
+              {
+                "name": "category_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a category"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

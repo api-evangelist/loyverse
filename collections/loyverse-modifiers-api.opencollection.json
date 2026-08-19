@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Modifiers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Modifiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List modifiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/modifiers"
+          },
+          "docs": "List modifiers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

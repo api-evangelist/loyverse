@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Inventory API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inventory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get inventory levels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/inventory",
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor for the next page of results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page."
+              },
+              {
+                "name": "store_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "variant_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of variant ids to filter by."
+              }
+            ]
+          },
+          "docs": "Returns stock on hand per variant and store."
+        },
+        {
+          "info": {
+            "name": "Update inventory levels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.loyverse.com/v1.0/inventory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets stock counts for one or more variant/store pairs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

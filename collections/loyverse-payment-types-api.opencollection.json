@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Loyverse Categories Payment Types API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List payment types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/payment_types"
+          },
+          "docs": "List payment types"
+        },
+        {
+          "info": {
+            "name": "Get a payment type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.loyverse.com/v1.0/payment_types/:payment_type_id",
+            "params": [
+              {
+                "name": "payment_type_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a payment type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
