@@ -30,6 +30,14 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/loyverse.png
 tags:
+- Point-of-Sale
+- Retail
+- Inventory
+- Cafe and Restaurant
+- Loyalty
+- Payments
+- Commerce
+tags_raw:
 - Point of Sale
 - POS
 - Retail
@@ -198,6 +206,8 @@ apis:
   humanURL: https://developer.loyverse.com/docs/#tag/Items
   baseURL: https://api.loyverse.com/v1.0
   tags:
+  - Item
+  tags_raw:
   - Items
   properties:
   - type: OpenAPI
