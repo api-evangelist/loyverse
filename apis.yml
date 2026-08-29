@@ -15,6 +15,18 @@ description: >-
   Authentication is by personal access token (Bearer) or OAuth 2.0
   authorization-code flow with scoped permissions, and webhooks push events such
   as receipts and inventory changes to consumer endpoints.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
