@@ -490,6 +490,8 @@ apis:
   humanURL: https://developer.loyverse.com/docs/#tag/Items
   baseURL: https://api.loyverse.com/v1.0
   tags:
+  - Tax
+  tags_raw:
   - Taxes
   properties:
   - type: OpenAPI
