@@ -1,21 +1,7 @@
 {
   "provider": "loyverse",
   "sources": [
-    "loyverse-categories-api-openapi.yml",
-    "loyverse-customers-api-openapi.yml",
-    "loyverse-discounts-api-openapi.yml",
-    "loyverse-employees-api-openapi.yml",
-    "loyverse-inventory-api-openapi.yml",
-    "loyverse-items-api-openapi.yml",
-    "loyverse-merchants-api-openapi.yml",
-    "loyverse-modifiers-api-openapi.yml",
-    "loyverse-payment-types-api-openapi.yml",
-    "loyverse-pos-devices-api-openapi.yml",
-    "loyverse-receipts-api-openapi.yml",
-    "loyverse-shifts-api-openapi.yml",
-    "loyverse-stores-api-openapi.yml",
-    "loyverse-suppliers-api-openapi.yml",
-    "loyverse-taxes-api-openapi.yml"
+    "_original/loyverse-openapi.yml"
   ],
   "outputs": [
     "loyverse-categories-api-openapi.yml",
@@ -26,8 +12,8 @@
     "loyverse-items-api-openapi.yml",
     "loyverse-merchants-api-openapi.yml",
     "loyverse-modifiers-api-openapi.yml",
-    "loyverse-payment-types-api-openapi.yml",
     "loyverse-pos-devices-api-openapi.yml",
+    "loyverse-payment-types-api-openapi.yml",
     "loyverse-receipts-api-openapi.yml",
     "loyverse-shifts-api-openapi.yml",
     "loyverse-stores-api-openapi.yml",
@@ -37,6 +23,26 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "loyverse-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "loyverse-categories-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-discounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-employees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-inventory-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-merchants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-modifiers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-payment-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-pos-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-receipts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-shifts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-stores-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "loyverse-taxes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Loyverse Categories Employees API
-  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  title: Loyverse Employees API
+  description: REST API for the Loyverse point of sale (POS) platform.
   version: '1.0'
   contact:
     name: Loyverse Developers
@@ -79,11 +79,6 @@ paths:
         '200':
           description: Deletion result.
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
   parameters:
     Cursor:
       name: cursor
@@ -110,11 +105,13 @@ components:
         name:
           type: string
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         phone_number:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         stores:
           type: array
           items:
@@ -125,9 +122,15 @@ components:
           type: string
           format: date-time
         deleted_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

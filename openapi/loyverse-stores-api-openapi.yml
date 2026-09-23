@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Loyverse Categories Stores API
-  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  title: Loyverse Stores API
+  description: REST API for the Loyverse point of sale (POS) platform.
   version: '1.0'
   contact:
     name: Loyverse Developers
@@ -68,44 +68,10 @@ components:
       type: object
       properties:
         cursor:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cursor to pass to fetch the next page, or null on the last page.
-    Store:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        address:
-          type: string
-          nullable: true
-        city:
-          type: string
-          nullable: true
-        region:
-          type: string
-          nullable: true
-        postal_code:
-          type: string
-          nullable: true
-        country_code:
-          type: string
-          nullable: true
-        phone_number:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        created_at:
-          type: string
-          format: date-time
-        deleted_at:
-          type: string
-          format: date-time
-          nullable: true
     StoresPage:
       allOf:
       - $ref: '#/components/schemas/Cursorable'
@@ -115,11 +81,49 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Store'
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
+    Store:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        address:
+          type:
+          - string
+          - 'null'
+        city:
+          type:
+          - string
+          - 'null'
+        region:
+          type:
+          - string
+          - 'null'
+        postal_code:
+          type:
+          - string
+          - 'null'
+        country_code:
+          type:
+          - string
+          - 'null'
+        phone_number:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
   parameters:
     Cursor:
       name: cursor
@@ -137,6 +141,11 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

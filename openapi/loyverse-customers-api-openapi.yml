@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Loyverse Categories Customers API
-  description: REST API for the Loyverse point of sale (POS) platform. Loyverse is a free POS for small retail stores, cafes, bars, and restaurants; this API exposes the same data as the POS and Back Office - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts. All endpoints are HTTPS REST with cursor-based pagination. Authenticate with a personal access token (Bearer) generated in the Back Office, or with the OAuth 2.0 authorization-code flow for third-party apps acting on behalf of other merchants. This document is derived from the public Loyverse API reference and grounds real endpoints; request and response schemas are summarized and should be verified against the live reference during reconciliation.
+  title: Loyverse Customers API
+  description: REST API for the Loyverse point of sale (POS) platform.
   version: '1.0'
   contact:
     name: Loyverse Developers
@@ -92,22 +92,6 @@ paths:
           description: Deletion result.
 components:
   schemas:
-    Cursorable:
-      type: object
-      properties:
-        cursor:
-          type: string
-          nullable: true
-          description: Cursor to pass to fetch the next page, or null on the last page.
-    CustomersPage:
-      allOf:
-      - $ref: '#/components/schemas/Cursorable'
-      - type: object
-        properties:
-          customers:
-            type: array
-            items:
-              $ref: '#/components/schemas/Customer'
     Customer:
       type: object
       properties:
@@ -116,34 +100,43 @@ components:
         name:
           type: string
         email:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         phone_number:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         address:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         city:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         country_code:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         customer_code:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         note:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         first_visit:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         last_visit:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         total_visits:
           type: integer
         total_spent:
@@ -154,14 +147,27 @@ components:
           type: string
           format: date-time
         deleted_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    CustomersPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          customers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Customer'
   parameters:
     Cursor:
       name: cursor
@@ -179,6 +185,11 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
