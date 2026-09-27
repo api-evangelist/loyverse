@@ -92,6 +92,23 @@ paths:
           description: Deletion result.
 components:
   schemas:
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor to pass to fetch the next page, or null on the last page.
+    CustomersPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          customers:
+            type: array
+            items:
+              $ref: '#/components/schemas/Customer'
     Customer:
       type: object
       properties:
@@ -151,23 +168,11 @@ components:
           - string
           - 'null'
           format: date-time
-    Cursorable:
-      type: object
-      properties:
-        cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor to pass to fetch the next page, or null on the last page.
-    CustomersPage:
-      allOf:
-      - $ref: '#/components/schemas/Cursorable'
-      - type: object
-        properties:
-          customers:
-            type: array
-            items:
-              $ref: '#/components/schemas/Customer'
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
   parameters:
     Cursor:
       name: cursor
@@ -185,11 +190,6 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

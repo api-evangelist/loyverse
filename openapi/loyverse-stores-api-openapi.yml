@@ -124,6 +124,11 @@ components:
           - string
           - 'null'
           format: date-time
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
   parameters:
     Cursor:
       name: cursor
@@ -141,11 +146,6 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
-    NotFound:
-      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
