@@ -174,13 +174,6 @@ components:
     Unauthorized:
       description: Missing or invalid access token.
   parameters:
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Opaque cursor for the next page of results.
     Limit:
       name: limit
       in: query
@@ -190,6 +183,13 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
   securitySchemes:
     bearerAuth:
       type: http

@@ -116,6 +116,44 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Item'
+    Variant:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        item_id:
+          type: string
+        sku:
+          type: string
+        option1_value:
+          type:
+          - string
+          - 'null'
+        default_price:
+          type:
+          - number
+          - 'null'
+        cost:
+          type:
+          - number
+          - 'null'
+        barcode:
+          type:
+          - string
+          - 'null'
+        stores:
+          type: array
+          items:
+            type: object
+            properties:
+              store_id:
+                type: string
+              price:
+                type:
+                - number
+                - 'null'
+              available_for_sale:
+                type: boolean
     Item:
       type: object
       properties:
@@ -162,57 +200,12 @@ components:
           - string
           - 'null'
           format: date-time
-    Variant:
-      type: object
-      properties:
-        variant_id:
-          type: string
-        item_id:
-          type: string
-        sku:
-          type: string
-        option1_value:
-          type:
-          - string
-          - 'null'
-        default_price:
-          type:
-          - number
-          - 'null'
-        cost:
-          type:
-          - number
-          - 'null'
-        barcode:
-          type:
-          - string
-          - 'null'
-        stores:
-          type: array
-          items:
-            type: object
-            properties:
-              store_id:
-                type: string
-              price:
-                type:
-                - number
-                - 'null'
-              available_for_sale:
-                type: boolean
   responses:
     NotFound:
       description: The requested resource was not found.
     Unauthorized:
       description: Missing or invalid access token.
   parameters:
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Opaque cursor for the next page of results.
     Limit:
       name: limit
       in: query
@@ -228,6 +221,13 @@ components:
       required: true
       schema:
         type: string
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
   securitySchemes:
     bearerAuth:
       type: http

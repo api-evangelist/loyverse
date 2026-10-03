@@ -83,15 +83,6 @@ components:
           - string
           - 'null'
           description: Cursor to pass to fetch the next page, or null on the last page.
-    InventoryPage:
-      allOf:
-      - $ref: '#/components/schemas/Cursorable'
-      - type: object
-        properties:
-          inventory_levels:
-            type: array
-            items:
-              $ref: '#/components/schemas/InventoryLevel'
     InventoryLevel:
       type: object
       properties:
@@ -104,14 +95,19 @@ components:
         updated_at:
           type: string
           format: date-time
+    InventoryPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          inventory_levels:
+            type: array
+            items:
+              $ref: '#/components/schemas/InventoryLevel'
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
   parameters:
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Opaque cursor for the next page of results.
     Limit:
       name: limit
       in: query
@@ -121,9 +117,13 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
-  responses:
-    Unauthorized:
-      description: Missing or invalid access token.
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
   securitySchemes:
     bearerAuth:
       type: http

@@ -53,10 +53,10 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Missing or invalid access token.
     NotFound:
       description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid access token.
   securitySchemes:
     bearerAuth:
       type: http
