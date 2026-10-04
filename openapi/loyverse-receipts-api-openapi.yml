@@ -99,15 +99,24 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
   schemas:
-    Cursorable:
-      type: object
-      properties:
-        cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor to pass to fetch the next page, or null on the last page.
     ReceiptsPage:
       allOf:
       - $ref: '#/components/schemas/Cursorable'
@@ -117,43 +126,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Receipt'
-    ReceiptLineItem:
+    Cursorable:
       type: object
       properties:
-        id:
-          type: string
-        item_id:
-          type: string
-        variant_id:
-          type: string
-        item_name:
-          type: string
-        quantity:
-          type: number
-        price:
-          type: number
-        gross_total_money:
-          type: number
-        total_money:
-          type: number
-        line_taxes:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              money_amount:
-                type: number
-        line_discounts:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              money_amount:
-                type: number
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor to pass to fetch the next page, or null on the last page.
     Receipt:
       type: object
       properties:
@@ -217,28 +197,48 @@ components:
                 type: number
               name:
                 type: string
+    ReceiptLineItem:
+      type: object
+      properties:
+        id:
+          type: string
+        item_id:
+          type: string
+        variant_id:
+          type: string
+        item_name:
+          type: string
+        quantity:
+          type: number
+        price:
+          type: number
+        gross_total_money:
+          type: number
+        total_money:
+          type: number
+        line_taxes:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
+        line_discounts:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              money_amount:
+                type: number
   responses:
-    NotFound:
-      description: The requested resource was not found.
     Unauthorized:
       description: Missing or invalid access token.
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 50
-        maximum: 250
-      description: Maximum number of records to return per page.
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Opaque cursor for the next page of results.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

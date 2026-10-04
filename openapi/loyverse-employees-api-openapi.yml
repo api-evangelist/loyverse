@@ -109,11 +109,6 @@ components:
           - string
           - 'null'
           format: date-time
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
   parameters:
     Limit:
       name: limit
@@ -131,6 +126,11 @@ components:
       schema:
         type: string
       description: Opaque cursor for the next page of results.
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

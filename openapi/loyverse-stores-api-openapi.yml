@@ -64,14 +64,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Cursorable:
-      type: object
-      properties:
-        cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor to pass to fetch the next page, or null on the last page.
     StoresPage:
       allOf:
       - $ref: '#/components/schemas/Cursorable'
@@ -81,6 +73,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Store'
+    Cursorable:
+      type: object
+      properties:
+        cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor to pass to fetch the next page, or null on the last page.
     Store:
       type: object
       properties:
@@ -124,11 +124,6 @@ components:
           - string
           - 'null'
           format: date-time
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
   parameters:
     Limit:
       name: limit
@@ -146,6 +141,11 @@ components:
       schema:
         type: string
       description: Opaque cursor for the next page of results.
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http

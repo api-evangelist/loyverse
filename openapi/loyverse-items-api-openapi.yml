@@ -99,14 +99,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Cursorable:
-      type: object
-      properties:
-        cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor to pass to fetch the next page, or null on the last page.
     ItemsPage:
       allOf:
       - $ref: '#/components/schemas/Cursorable'
@@ -116,44 +108,14 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/Item'
-    Variant:
+    Cursorable:
       type: object
       properties:
-        variant_id:
-          type: string
-        item_id:
-          type: string
-        sku:
-          type: string
-        option1_value:
+        cursor:
           type:
           - string
           - 'null'
-        default_price:
-          type:
-          - number
-          - 'null'
-        cost:
-          type:
-          - number
-          - 'null'
-        barcode:
-          type:
-          - string
-          - 'null'
-        stores:
-          type: array
-          items:
-            type: object
-            properties:
-              store_id:
-                type: string
-              price:
-                type:
-                - number
-                - 'null'
-              available_for_sale:
-                type: boolean
+          description: Cursor to pass to fetch the next page, or null on the last page.
     Item:
       type: object
       properties:
@@ -200,11 +162,44 @@ components:
           - string
           - 'null'
           format: date-time
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-    Unauthorized:
-      description: Missing or invalid access token.
+    Variant:
+      type: object
+      properties:
+        variant_id:
+          type: string
+        item_id:
+          type: string
+        sku:
+          type: string
+        option1_value:
+          type:
+          - string
+          - 'null'
+        default_price:
+          type:
+          - number
+          - 'null'
+        cost:
+          type:
+          - number
+          - 'null'
+        barcode:
+          type:
+          - string
+          - 'null'
+        stores:
+          type: array
+          items:
+            type: object
+            properties:
+              store_id:
+                type: string
+              price:
+                type:
+                - number
+                - 'null'
+              available_for_sale:
+                type: boolean
   parameters:
     Limit:
       name: limit
@@ -215,12 +210,6 @@ components:
         default: 50
         maximum: 250
       description: Maximum number of records to return per page.
-    ItemId:
-      name: item_id
-      in: path
-      required: true
-      schema:
-        type: string
     Cursor:
       name: cursor
       in: query
@@ -228,6 +217,17 @@ components:
       schema:
         type: string
       description: Opaque cursor for the next page of results.
+    ItemId:
+      name: item_id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid access token.
+    NotFound:
+      description: The requested resource was not found.
   securitySchemes:
     bearerAuth:
       type: http
