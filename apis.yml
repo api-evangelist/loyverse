@@ -517,6 +517,9 @@ apis:
   - type: APIReference
     url: https://developer.loyverse.com/docs/#tag/Employees
 common:
+- type: CapabilityMap
+  url: capabilities/loyverse-capability-edges.yml
+  name: Loyverse Business Capability Map
 - type: AgenticAccess
   url: agentic-access/loyverse-agentic-access.yml
 - type: Authentication
