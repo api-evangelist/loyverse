@@ -74,24 +74,16 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    Limit:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 50
-        maximum: 250
-      description: Maximum number of records to return per page.
-    Cursor:
-      name: cursor
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Opaque cursor for the next page of results.
   schemas:
+    InventoryPage:
+      allOf:
+      - $ref: '#/components/schemas/Cursorable'
+      - type: object
+        properties:
+          inventory_levels:
+            type: array
+            items:
+              $ref: '#/components/schemas/InventoryLevel'
     Cursorable:
       type: object
       properties:
@@ -112,18 +104,26 @@ components:
         updated_at:
           type: string
           format: date-time
-    InventoryPage:
-      allOf:
-      - $ref: '#/components/schemas/Cursorable'
-      - type: object
-        properties:
-          inventory_levels:
-            type: array
-            items:
-              $ref: '#/components/schemas/InventoryLevel'
   responses:
     Unauthorized:
       description: Missing or invalid access token.
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 50
+        maximum: 250
+      description: Maximum number of records to return per page.
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Opaque cursor for the next page of results.
   securitySchemes:
     bearerAuth:
       type: http
