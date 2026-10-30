@@ -1,4 +1,4 @@
-# Loyverse (loyverse)
+# Loyverse
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,203 +64,146 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Loyverse is a free point of sale (POS) platform for small and independent retail stores, cafes, bars, and restaurants. The product suite includes the Loyverse POS app (iOS/Android), the Back Office dashboard, Kitchen Display, and Customer Display. The Loyverse API is a documented REST API at `https://api.loyverse.com/v1.0` that exposes the same POS data — items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts — so developers can build integrations for accounting, e-commerce order sync, inventory synchronization, loyalty and marketing, e-invoicing compliance, and custom reporting.
+Loyverse is a free point of sale (POS) platform for small and independent retail stores, cafes, bars, and restaurants, spanning the Loyverse POS app, Back Office dashboard, Kitchen Display, and Customer Display. The Loyverse API is a documented REST API at https://api.loyverse.com/v1.0 that exposes the same POS data - items and variants, categories, receipts (sales), customers and loyalty, inventory levels, stores, employees, payment types, taxes, discounts, modifiers, suppliers, POS devices, and shifts - so developers can build integrations for accounting, e-commerce order sync, inventory synchronization, loyalty and marketing, e-invoicing compliance, and custom reporting. Authentication is by personal access token (Bearer) or OAuth 2.0 authorization-code flow with scoped permissions, and webhooks push events such as receipts and inventory changes to consumer endpoints.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/loyverse/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/loyverse/refs/heads/main/apis.yml)
+**Areas:** Point-of-Sale · Retail · Inventory · Cafe and Restaurant · Loyalty · Payments · Commerce
 
-## Access Model
+## Loyverse on APIs.io
 
-The Loyverse POS, Dashboard, Kitchen Display, and Customer Display apps are free. Paid add-ons (Employee Management, Advanced Inventory, and Unlimited Sales History) are billed per store. The API is available to all accounts and is accessed over HTTPS.
+Everything profiled for Loyverse is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/loyverse/](https://apis.io/providers/loyverse/)** — or go straight to one of the APIs or properties below.
 
-Two authentication methods are supported:
+### APIs (15)
 
-- **Personal access token (Bearer).** Generated in the Back Office under Settings → Access Tokens (up to 20 per account, each with an optional expiration date). A personal token grants unlimited access to all resources of the account that created it, and is passed as `Authorization: Bearer YOUR_ACCESS_TOKEN`. Best for a merchant integrating their own account.
-- **OAuth 2.0 (authorization code).** For third-party apps acting on behalf of other merchants. Register an app in the Loyverse developer dashboard to obtain a `client_id`/`client_secret`, send users to `https://api.loyverse.com/oauth/authorize`, and exchange the code at `https://api.loyverse.com/oauth/token`. Access is limited to the scopes granted (for example `ITEMS_READ`, `RECEIPTS_WRITE`, `INVENTORY_WRITE`, `CUSTOMERS_READ`, `STORES_READ`, `MERCHANT_READ`).
+- [Loyverse Categories API](https://apis.io/apis/loyverse/loyverse-categories-api/) — Merchandising categories for items.
+- [Loyverse Customers API](https://apis.io/apis/loyverse/loyverse-customers-api/) — Customer directory and loyalty program.
+- [Loyverse Discounts API](https://apis.io/apis/loyverse/loyverse-discounts-api/) — Discount definitions applied at the POS.
+- [Loyverse Employees API](https://apis.io/apis/loyverse/loyverse-employees-api/) — Employees who operate the POS.
+- [Loyverse Inventory API](https://apis.io/apis/loyverse/loyverse-inventory-api/) — Stock levels per variant and store.
+- [Loyverse Items API](https://apis.io/apis/loyverse/loyverse-items-api/) — Product catalog items, variants, SKUs, and pricing.
+- [Loyverse Merchants API](https://apis.io/apis/loyverse/loyverse-merchants-api/) — Merchant account information.
+- [Loyverse Modifiers API](https://apis.io/apis/loyverse/loyverse-modifiers-api/) — Item modifiers and options.
+- [Loyverse Payment Types API](https://apis.io/apis/loyverse/loyverse-payment-types-api/) — Configured payment types.
+- [Loyverse POS Devices API](https://apis.io/apis/loyverse/loyverse-pos-devices-api/) — Registered POS devices per store.
+- [Loyverse Receipts API](https://apis.io/apis/loyverse/loyverse-receipts-api/) — Sales receipts with line items, payments, taxes, and refunds.
+- [Loyverse Shifts API](https://apis.io/apis/loyverse/loyverse-shifts-api/) — Cash register shifts.
+- [Loyverse Stores API](https://apis.io/apis/loyverse/loyverse-stores-api/) — Merchant stores (locations).
+- [Loyverse Suppliers API](https://apis.io/apis/loyverse/loyverse-suppliers-api/) — Suppliers for inventory and purchasing.
+- [Loyverse Taxes API](https://apis.io/apis/loyverse/loyverse-taxes-api/) — Tax definitions applied to items.
 
-All endpoints are request/response REST over HTTPS with cursor-based pagination. Loyverse also supports webhooks (for example receipt and inventory events); webhooks created through an OAuth app include an `X-Loyverse-Signature` header for verification.
+### Published properties
 
-## Tags
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- Point of Sale
-- POS
-- Retail
-- Inventory
-- Cafe and Restaurant
-- Loyalty
-- Payments
-- Commerce
+#### Agentic access (1)
 
-## Timestamps
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+- [Loyverse Agentic Access](https://apis.io/agentic-access/loyverse/loyverse-agentic-access/)
 
-## APIs
+#### Collections (16)
 
-### Loyverse Items API
+Postman and Open Collection request collections.
 
-Manage the product catalog behind the point of sale — list, create or update, retrieve, and delete items, including their variants, SKUs, pricing, categories, taxes, and modifiers. The core catalog surface for keeping products in sync between Loyverse and e-commerce, ERP, or accounting systems.
+- [Loyverse API](https://apis.io/collections/loyverse/open-loyverse/)
+- [Loyverse Categories API](https://apis.io/collections/loyverse/open-loyverse-categories-api/)
+- [Loyverse Categories Customers API](https://apis.io/collections/loyverse/open-loyverse-customers-api/)
+- [Loyverse Categories Discounts API](https://apis.io/collections/loyverse/open-loyverse-discounts-api/)
+- [Loyverse Categories Employees API](https://apis.io/collections/loyverse/open-loyverse-employees-api/)
+- [Loyverse Categories Inventory API](https://apis.io/collections/loyverse/open-loyverse-inventory-api/)
+- [Loyverse Categories Items API](https://apis.io/collections/loyverse/open-loyverse-items-api/)
+- [Loyverse Categories Merchants API](https://apis.io/collections/loyverse/open-loyverse-merchants-api/)
+- [Loyverse Categories Modifiers API](https://apis.io/collections/loyverse/open-loyverse-modifiers-api/)
+- [Loyverse Categories Payment Types API](https://apis.io/collections/loyverse/open-loyverse-payment-types-api/)
+- [Loyverse Categories POS Devices API](https://apis.io/collections/loyverse/open-loyverse-pos-devices-api/)
+- [Loyverse Categories Receipts API](https://apis.io/collections/loyverse/open-loyverse-receipts-api/)
+- [Loyverse Categories Shifts API](https://apis.io/collections/loyverse/open-loyverse-shifts-api/)
+- [Loyverse Categories Stores API](https://apis.io/collections/loyverse/open-loyverse-stores-api/)
+- [Loyverse Categories Suppliers API](https://apis.io/collections/loyverse/open-loyverse-suppliers-api/)
+- [Loyverse Categories Taxes API](https://apis.io/collections/loyverse/open-loyverse-taxes-api/)
 
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Items](https://developer.loyverse.com/docs/#tag/Items)
-- **Base URL:** `https://api.loyverse.com/v1.0`
+#### Security (1)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Items
-- Catalog
-- Variants
-- Retail
-- Inventory
+- [Loyverse Authentication](https://apis.io/security/loyverse/loyverse-authentication/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developer.loyverse.com/docs/)
-- [API Reference](https://developer.loyverse.com/docs/#tag/Items)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Loyverse Categories API
+- [Loyverse Plans Pricing](https://apis.io/plans/loyverse/loyverse-plans-pricing/)
 
-List, create or update, retrieve, and delete the merchandising categories used to organize items across the POS and Back Office reporting.
+#### Rate limits (1)
 
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Categories](https://developer.loyverse.com/docs/#tag/Categories)
-- **Base URL:** `https://api.loyverse.com/v1.0`
+Published request limits.
 
-#### Tags
+- [Loyverse Rate Limits](https://apis.io/rate-limits/loyverse/loyverse-rate-limits/)
 
-- Categories
-- Catalog
-- Merchandising
-- Retail
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [API Reference](https://developer.loyverse.com/docs/#tag/Categories)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Loyverse Finops](https://apis.io/finops/loyverse/loyverse-finops/)
 
-### Loyverse Receipts API
+## Where to find this API
 
-Read sales history and post new sales — list receipts (with line items, payments, taxes, discounts, and refunds), retrieve a single receipt by number, and create receipts to push orders from e-commerce and delivery platforms into Loyverse as sales.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Receipts](https://developer.loyverse.com/docs/#tag/Receipts)
-- **Base URL:** `https://api.loyverse.com/v1.0`
-
-#### Tags
-
-- Receipts
-- Sales
-- Orders
-- Transactions
-- Point of Sale
-
-#### Properties
-
-- [API Reference](https://developer.loyverse.com/docs/#tag/Receipts)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Loyverse Customers API
-
-Manage the customer directory and loyalty program — list, create or update, retrieve, and delete customers along with their contact details, total visits and spend, and loyalty points, to sync CRM data and run personalized campaigns.
-
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Customers](https://developer.loyverse.com/docs/#tag/Customers)
-- **Base URL:** `https://api.loyverse.com/v1.0`
-
-#### Tags
-
-- Customers
-- Loyalty
-- CRM
-- Marketing
-
-#### Properties
-
-- [API Reference](https://developer.loyverse.com/docs/#tag/Customers)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Loyverse Inventory API
-
-Read and set stock on hand per item variant and store — get inventory levels and post updated counts to keep stock synchronized across Loyverse and other platforms such as online stores and warehouses.
-
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Inventory](https://developer.loyverse.com/docs/#tag/Inventory)
-- **Base URL:** `https://api.loyverse.com/v1.0`
-
-#### Tags
-
-- Inventory
-- Stock Levels
-- Retail
-- Warehousing
-
-#### Properties
-
-- [API Reference](https://developer.loyverse.com/docs/#tag/Inventory)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Loyverse Stores API
-
-List and retrieve the merchant's stores (locations), providing the `store_id` values that scope receipts, inventory, POS devices, and employees across a multi-location business.
-
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Stores](https://developer.loyverse.com/docs/#tag/Stores)
-- **Base URL:** `https://api.loyverse.com/v1.0`
-
-#### Tags
-
-- Stores
-- Locations
-- Multi-Location
-- Retail
-
-#### Properties
-
-- [API Reference](https://developer.loyverse.com/docs/#tag/Stores)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Loyverse Employees API
-
-List, create or update, retrieve, and delete employees who operate the POS, including their roles and store assignments (Employee Management add-on features surface here).
-
-- **Human URL:** [https://developer.loyverse.com/docs/#tag/Employees](https://developer.loyverse.com/docs/#tag/Employees)
-- **Base URL:** `https://api.loyverse.com/v1.0`
-
-#### Tags
-
-- Employees
-- Staff
-- Access Control
-- Point of Sale
-
-#### Properties
-
-- [API Reference](https://developer.loyverse.com/docs/#tag/Employees)
-- [OpenAPI](openapi/loyverse-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/loyverse.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/loyverse.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Authentication](authentication/loyverse-authentication.yml)
-- [LinkedIn](https://www.linkedin.com/company/loyverse)
 - [Website](https://loyverse.com)
 - [Documentation](https://developer.loyverse.com/docs/)
-- [Sign Up](https://developer.loyverse.com)
-- [Plans](plans/loyverse-plans-pricing.yml)
-- [Rate Limits](rate-limits/loyverse-rate-limits.yml)
-- [Fin Ops](finops/loyverse-finops.yml)
+- [Sign up](https://developer.loyverse.com)
 - [Support](https://help.loyverse.com/help/api-marketplace)
-- [Community](https://loyverse.town/clubs/2-loyverse-api/)
+- [Blog](https://loyverse.com/blog)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.7** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 46.8 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 36.9 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 5.4** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/loyverse/](https://apis.io/providers/loyverse/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Loyverse: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/loyverse/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
